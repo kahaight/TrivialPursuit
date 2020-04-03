@@ -19,7 +19,7 @@ namespace TrivialPursuit.Data.DataClasses
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         [ForeignKey(nameof(Author))]
-        public Guid AuthorId { get; set; }
+        public string AuthorId { get; set; }
         public virtual ApplicationUser Author { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
         public bool IsUserGenerated { get; set; }

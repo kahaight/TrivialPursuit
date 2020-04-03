@@ -79,6 +79,10 @@ namespace TrivialPursuitMVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name = "Name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        public string DisplayName { get; set; }
     }
 
     public class ResetPasswordViewModel
