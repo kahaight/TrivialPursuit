@@ -37,7 +37,8 @@ namespace TrivialPursuit.Data.Migrations
             {
                 var user = new ApplicationUser()
                 {
-                    UserName = string.Format("User{0}", i.ToString())
+                    UserName = string.Format("User{0}", i.ToString()),
+                    DisplayName = string.Format("User{0}", i.ToString())
                 };
                 manager.Create(user, string.Format("Password{0}", i.ToString()));
             }

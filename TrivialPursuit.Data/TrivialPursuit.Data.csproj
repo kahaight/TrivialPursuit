@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202004020002452_Init.Designer.cs">
       <DependentUpon>202004020002452_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004031531585_AppUserClassUpdate.cs" />
+    <Compile Include="Migrations\202004031531585_AppUserClassUpdate.Designer.cs">
+      <DependentUpon>202004031531585_AppUserClassUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004020002452_Init.resx">
       <DependentUpon>202004020002452_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031531585_AppUserClassUpdate.resx">
+      <DependentUpon>202004031531585_AppUserClassUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
