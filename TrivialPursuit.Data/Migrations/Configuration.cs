@@ -30,18 +30,7 @@ namespace TrivialPursuit.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            var manager = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(
-                    new ApplicationDbContext()));
-            for (int i = 0; i < 4; i++)
-            {
-                var user = new ApplicationUser()
-                {
-                    UserName = string.Format("User{0}", i.ToString()),
-                    DisplayName = string.Format("User{0}", i.ToString())
-                };
-                manager.Create(user, string.Format("Password{0}", i.ToString()));
-            }
+
         }
     }
 }
