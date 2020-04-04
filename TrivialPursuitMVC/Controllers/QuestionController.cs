@@ -50,7 +50,7 @@ namespace TrivialPursuitMVC.Controllers
         public ActionResult Details(int id)
         {
             var svc = CreateQuestionService();
-            var model = svc.GetQuestionById();
+            var model = svc.GetQuestionById(id);
 
             return View(model);
         }

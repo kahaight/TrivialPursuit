@@ -57,6 +57,7 @@ namespace TrivialPursuit.Services
                 return query.ToArray();
             }
         }
+        //add another version of this and and if statement in the controller that accesses one or the other depending on the type of user (admin vs player)
         public QuestionDetail GetQuestionById(int id)
         {
             var asvc = new AnswerService();
@@ -65,7 +66,7 @@ namespace TrivialPursuit.Services
                 var entity =
                     ctx
                         .Questions
-                        .Single(e => e.Id == id && e.AuthorId == _userId.ToString());
+                        .Single(e => e.Id == id && e.AuthorId == _userId.ToString());//doesn't work if you aren't the author
                 return
                     new QuestionDetail
                     {
