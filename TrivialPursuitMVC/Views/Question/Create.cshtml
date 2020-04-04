@@ -26,7 +26,14 @@
         @Html.Label("Category", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @*@Html.DropDownList("Name")*@
-            @Html.DropDownList("Category", (SelectList)ViewBag.Name, " ")
+            @Html.DropDownList("Category", (SelectList)ViewBag.CategoryName, " ")
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Version", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.DropDownList("Name")*@
+            @Html.DropDownList("Version", (SelectList)ViewBag.VersionName, " ")
         </div>
     </div>
     <div class="form-group">

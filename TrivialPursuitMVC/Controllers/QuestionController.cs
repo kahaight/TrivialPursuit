@@ -26,7 +26,8 @@ namespace TrivialPursuitMVC.Controllers
         //GET
         public ActionResult Create()
         {
-            ViewBag.Name = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             return View();
         }
 
@@ -39,7 +40,8 @@ namespace TrivialPursuitMVC.Controllers
                 return View(model);
             }
 
-            ViewBag.Name = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new QuestionService(userId);
             service.CreateQuestion(model);

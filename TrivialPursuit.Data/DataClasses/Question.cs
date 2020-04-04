@@ -18,6 +18,9 @@ namespace TrivialPursuit.Data.DataClasses
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+        [ForeignKey(nameof(Version))]
+        public int VersionId { get; set; }
+        public virtual Version Version { get; set; }
         [ForeignKey(nameof(Author))]
         public string AuthorId { get; set; }
         public virtual ApplicationUser Author { get; set; }

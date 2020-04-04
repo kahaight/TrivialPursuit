@@ -13,6 +13,7 @@ namespace TrivialPursuit.Services
     {
         private CategoryService _categoryService = new CategoryService();
         private UserService _userService = new UserService();
+        private VersionService _versionService = new VersionService();
         private readonly Guid _userId;
         public QuestionService(Guid userId)
         {
@@ -27,6 +28,7 @@ namespace TrivialPursuit.Services
                     AuthorId = _userId.ToString(),
                     Text = model.Text,
                     CategoryId = _categoryService.GetCategoryIdByName(model.Category),
+                    VersionId = _versionService.GetVersionIdByName(model.Version),
                     IsUserGenerated = _userService.ConfirmUserIsPlayer(_userId.ToString())
                 };
             using (var ctx = new ApplicationDbContext())

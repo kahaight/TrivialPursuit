@@ -10,5 +10,6 @@ namespace TrivialPursuitMVC.Models.Question
     {
         public string Text { get; set; }
         public string Category { get; set; }
+        public string Version { get; set; }
     }
 }

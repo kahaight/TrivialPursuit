@@ -10,6 +10,8 @@ namespace TrivialPursuit.Data.DataClasses
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<CategoryVersion> CategoryVersions { get; set; }
+        public string Description { get; set; }
+        public int ReleaseYear { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

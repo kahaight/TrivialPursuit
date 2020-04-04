@@ -64,8 +64,6 @@ namespace TrivialPursuitMVC.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Version> Versions { get; set; }
-        public DbSet<CategoryVersion> CategoryVersions { get; set; }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
