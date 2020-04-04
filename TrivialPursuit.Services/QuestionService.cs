@@ -35,5 +35,24 @@ namespace TrivialPursuit.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public IEnumerable<QuestionListItem> GetQuestions()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Questions
+                        .Select(
+                            e =>
+                                new QuestionListItem
+                                {
+                                    QuestionId = e.Id,
+                                    Text = e.Text,
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
     }
 }
