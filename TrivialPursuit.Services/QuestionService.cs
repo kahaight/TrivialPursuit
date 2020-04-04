@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrivialPursuit.Data.DataClasses;
+using TrivialPursuit.Models.Question;
 using TrivialPursuitMVC.Data;
 using TrivialPursuitMVC.Models.Question;
 
@@ -54,6 +55,27 @@ namespace TrivialPursuit.Services
                         );
 
                 return query.ToArray();
+            }
+        }
+        public QuestionDetail GetQuestionById(int id)
+        {
+            var asvc = new AnswerService();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Questions
+                        .Single(e => e.Id == id && e.AuthorId == _userId.ToString());
+                return
+                    new QuestionDetail
+                    {
+                        Id = entity.Id,
+                        Text = entity.Text,
+                        Category = entity.Category.Name,
+                        Version = entity.Version.Name,
+                        Author = entity.Author.DisplayName,
+                        Answers = asvc.ConvertAnswersToStrings(entity.Answers)
+                    };
             }
         }
     }

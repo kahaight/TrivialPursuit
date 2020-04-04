@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202004040401274_DeNull.Designer.cs">
       <DependentUpon>202004040401274_DeNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004041738389_AddTextToAnswer.cs" />
+    <Compile Include="Migrations\202004041738389_AddTextToAnswer.Designer.cs">
+      <DependentUpon>202004041738389_AddTextToAnswer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004040401274_DeNull.resx">
       <DependentUpon>202004040401274_DeNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004041738389_AddTextToAnswer.resx">
+      <DependentUpon>202004041738389_AddTextToAnswer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

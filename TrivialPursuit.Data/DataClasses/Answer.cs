@@ -12,6 +12,7 @@ namespace TrivialPursuit.Data.DataClasses
     {
         [Key]
         public int Id { get; set; }
+        public string Text { get; set; }
         [ForeignKey(nameof(Question))]
         public int QuestiondId { get; set; }
         public virtual Question Question { get; set; }

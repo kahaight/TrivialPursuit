@@ -154,7 +154,7 @@ namespace TrivialPursuitMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, DisplayName = model.DisplayName };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, DisplayName = model.DisplayName};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
