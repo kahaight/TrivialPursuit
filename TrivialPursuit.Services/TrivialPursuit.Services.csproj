@@ -54,11 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrivialPursuit.Data\TrivialPursuit.Data.csproj">
+      <Project>{2ad37fbf-a91d-4197-8175-bcfc695c2d43}</Project>
+      <Name>TrivialPursuit.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrivialPursuit.Models\TrivialPursuit.Models.csproj">
+      <Project>{a7227069-046e-4111-8b88-777f870c0b91}</Project>
+      <Name>TrivialPursuit.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
