@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrivialPursuit.Models.Question;
 using TrivialPursuit.Services;
 using TrivialPursuitMVC.Data;
 using TrivialPursuitMVC.Models.Question;
@@ -14,6 +15,8 @@ namespace TrivialPursuitMVC.Controllers
     public class QuestionController : Controller
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
+        private VersionService _versionService = new VersionService();
+        private CategoryService _categoryService = new CategoryService();
         // GET: Question
         public ActionResult Index()
         {
@@ -51,8 +54,68 @@ namespace TrivialPursuitMVC.Controllers
         {
             var svc = CreateQuestionService();
             var model = svc.GetQuestionById(id);
-
+            ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             return View(model);
+        }
+        public ActionResult Edit(int id)
+        {
+            var service = CreateQuestionService();
+            var detail = service.GetQuestionById(id);
+            var model =
+                new QuestionEdit
+                {
+                    Id = detail.Id,
+                    Text = detail.Text,
+                    Category = detail.Category,
+                    Version = detail.Version,
+                    Categories = _categoryService.GetCategoryStrings(),
+                    Versions = _versionService.GetVersionStrings()
+                };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, QuestionEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateQuestionService();
+
+            if (service.UpdateQuestion(model))
+            {
+                TempData["SaveResult"] = "Your question was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your question could not be updated.");
+            return View(model);
+        }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateQuestionService();
+            var model = svc.GetQuestionById(id);
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteQuestion(int id)
+        {
+            var service = CreateQuestionService();
+
+            service.DeleteQuestion(id);
+
+            TempData["SaveResult"] = "Your note was deleted";
+
+            return RedirectToAction("Index");
         }
         private QuestionService CreateQuestionService()
         {

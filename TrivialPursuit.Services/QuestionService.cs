@@ -63,20 +63,72 @@ namespace TrivialPursuit.Services
             var asvc = new AnswerService();
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                if (_userService.ConfirmUserIsPlayer(_userId.ToString()))
+                {
+                    var playerEntity =
+                         ctx
+                             .Questions
+                             .Single(e => e.Id == id && e.AuthorId == _userId.ToString());
+                    return
+                        new QuestionDetail
+                        {
+                            Id = playerEntity.Id,
+                            Text = playerEntity.Text,
+                            Category = playerEntity.Category.Name,
+                            Version = playerEntity.Version.Name,
+                            Author = playerEntity.Author.DisplayName,
+                            Answers = asvc.ConvertAnswersToStrings(playerEntity.Answers)
+                        };
+                }
+                var adminEntity =
                     ctx
                         .Questions
-                        .Single(e => e.Id == id && e.AuthorId == _userId.ToString());//doesn't work if you aren't the author
+                        .Single(e => e.Id == id);
                 return
                     new QuestionDetail
                     {
-                        Id = entity.Id,
-                        Text = entity.Text,
-                        Category = entity.Category.Name,
-                        Version = entity.Version.Name,
-                        Author = entity.Author.DisplayName,
-                        Answers = asvc.ConvertAnswersToStrings(entity.Answers)
+                        Id = adminEntity.Id,
+                        Text = adminEntity.Text,
+                        Category = adminEntity.Category.Name,
+                        Version = adminEntity.Version.Name,
+                        Author = adminEntity.Author.DisplayName,
+                        Answers = asvc.ConvertAnswersToStrings(adminEntity.Answers)
                     };
+            }
+        }
+        public bool UpdateQuestion(QuestionEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Questions
+                        .Single(e => e.Id == model.Id && e.AuthorId == _userId.ToString());
+
+                entity.Text = model.Text;
+                entity.CategoryId = _categoryService.GetCategoryIdByName(model.Category);
+                entity.VersionId = _versionService.GetVersionIdByName(model.Version);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteQuestion(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                if (_userService.ConfirmUserIsPlayer(_userId.ToString()))
+                {//add logic for if the user doesn't have authorization to delete someone else's note
+                    var userEntity =
+                    ctx
+                        .Questions
+                        .Single(e => e.Id == id && e.AuthorId == _userId.ToString());
+
+                    ctx.Questions.Remove(userEntity);
+                    return ctx.SaveChanges() == 1;
+                }
+                var adminEntity = ctx.Questions.Single(e => e.Id == id && e.AuthorId == _userId.ToString());
+
+                ctx.Questions.Remove(adminEntity);
+                return ctx.SaveChanges() == 1;
             }
         }
     }
