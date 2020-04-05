@@ -30,7 +30,7 @@ namespace TrivialPursuit.Services
                     Text = model.Text,
                     CategoryId = _categoryService.GetCategoryIdByName(model.Category),
                     VersionId = _versionService.GetVersionIdByName(model.Version),
-                    IsUserGenerated = _userService.ConfirmUserIsPlayer(_userId.ToString())
+                    IsUserGenerated = !_userService.ConfirmUserIsAdmin(_userId.ToString())
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -38,11 +38,13 @@ namespace TrivialPursuit.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        public IEnumerable<QuestionListItem> GetQuestions()
+        public IEnumerable<QuestionListItem> GetQuestions(Guid _userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query =
+                if (_userService.ConfirmUserIsAdmin(_userId.ToString()))
+                {
+                var adminQuery =
                     ctx
                         .Questions
                         .Select(
@@ -54,7 +56,23 @@ namespace TrivialPursuit.Services
                                 }
                         );
 
-                return query.ToArray();
+                return adminQuery.ToArray();
+
+                }
+                var playerQuery =
+                    ctx
+                        .Questions
+                        .Where(m=>m.AuthorId == _userId.ToString())
+                        .Select(
+                            e =>
+                                new QuestionListItem
+                                {
+                                    QuestionId = e.Id,
+                                    Text = e.Text,
+                                }
+                        );
+
+                return playerQuery.ToArray();
             }
         }
         //add another version of this and and if statement in the controller that accesses one or the other depending on the type of user (admin vs player)
@@ -63,7 +81,7 @@ namespace TrivialPursuit.Services
             var asvc = new AnswerService();
             using (var ctx = new ApplicationDbContext())
             {
-                if (_userService.ConfirmUserIsPlayer(_userId.ToString()))
+                if (!_userService.ConfirmUserIsAdmin(_userId.ToString()))
                 {
                     var playerEntity =
                          ctx
@@ -115,7 +133,7 @@ namespace TrivialPursuit.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                if (_userService.ConfirmUserIsPlayer(_userId.ToString()))
+                if (!_userService.ConfirmUserIsAdmin(_userId.ToString()))
                 {//add logic for if the user doesn't have authorization to delete someone else's note
                     var userEntity =
                     ctx

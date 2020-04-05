@@ -39,7 +39,7 @@ namespace TrivialPursuit.Services
                 Text = model.Text,
                 QuestiondId = model.QuestionId,
                 IsCorrectSpelling = model.IsCorrectSpelling,
-                IsUserGenerated = _userService.ConfirmUserIsPlayer(_userId.ToString())
+                IsUserGenerated = !_userService.ConfirmUserIsAdmin(_userId.ToString())
             };
             _context.Answers.Add(entity);
             return _context.SaveChanges() == 1;

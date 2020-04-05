@@ -14,9 +14,9 @@ namespace TrivialPursuit.Services
     {
         public UserService() { }
 
-        public bool ConfirmUserIsPlayer(string userId)
+        public bool ConfirmUserIsAdmin(string userId)
         {
-            bool userIsPlayer = true;
+            bool userIsPlayer = false;
             using (var ctx = new ApplicationDbContext())
             {
                 var user = ctx.Users.Single(e => e.Id == userId);
@@ -25,7 +25,7 @@ namespace TrivialPursuit.Services
                 if ((userManager.GetRoles(userId)).Contains("Admin"))
                 {
 
-                    userIsPlayer = false;
+                    userIsPlayer = true;
                 }
             }
             return userIsPlayer;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Trivial Pursuit</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -24,7 +24,17 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Questions", "Index", "Question")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Questions", "Index", "Question")</li>
+                        <li>
+                            @Html.ActionLink("Users", "Index", "User")
+                        </li>
+                    }
+                    @if (User.IsInRole("Player"))
+                    {
+                        <li>@Html.ActionLink("My Questions", "Index", "Question")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

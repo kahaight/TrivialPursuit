@@ -22,7 +22,7 @@ namespace TrivialPursuitMVC.Controllers
         public ActionResult Index()
         {
             var service = CreateQuestionService();
-            var model = service.GetQuestions();
+            var model = service.GetQuestions(Guid.Parse(User.Identity.GetUserId()));
             return View(model);
         }
         //GET
