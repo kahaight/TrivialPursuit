@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answer\AnswerCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question\QuestionCreate.cs" />
     <Compile Include="Question\QuestionDetail.cs" />

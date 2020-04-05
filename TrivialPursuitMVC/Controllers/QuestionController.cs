@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrivialPursuit.Models.Answer;
 using TrivialPursuit.Models.Question;
 using TrivialPursuit.Services;
 using TrivialPursuitMVC.Data;
@@ -117,6 +118,37 @@ namespace TrivialPursuitMVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //GET: Question/Answer/Id
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddAnswer(int id)
+        {
+            var service = CreateQuestionService();
+            ViewBag.Detail = service.GetQuestionById(id);
+
+            var model = new AnswerCreate { QuestionId = id };
+            return View(model);
+        }
+
+        //POST: Question/Answer/Id
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAnswer(AnswerCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = new AnswerService(User.Identity.GetUserId());
+                if (service.CreateAnswer(model))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View(model);
+        }
+
         private QuestionService CreateQuestionService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

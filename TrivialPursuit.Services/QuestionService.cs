@@ -12,9 +12,9 @@ namespace TrivialPursuit.Services
 {
     public class QuestionService
     {
-        private CategoryService _categoryService = new CategoryService();
-        private UserService _userService = new UserService();
-        private VersionService _versionService = new VersionService();
+        private readonly CategoryService _categoryService = new CategoryService();
+        private readonly UserService _userService = new UserService();
+        private readonly VersionService _versionService = new VersionService();
         private readonly Guid _userId;
         public QuestionService(Guid userId)
         {
