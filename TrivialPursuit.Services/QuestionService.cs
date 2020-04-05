@@ -16,6 +16,7 @@ namespace TrivialPursuit.Services
         private readonly UserService _userService = new UserService();
         private readonly VersionService _versionService = new VersionService();
         private readonly Guid _userId;
+        public QuestionService() { }
         public QuestionService(Guid userId)
         {
             _userId = userId;
@@ -134,7 +135,7 @@ namespace TrivialPursuit.Services
             using (var ctx = new ApplicationDbContext())
             {
                 if (!_userService.ConfirmUserIsAdmin(_userId.ToString()))
-                {//add logic for if the user doesn't have authorization to delete someone else's note
+                {
                     var userEntity =
                     ctx
                         .Questions
@@ -143,7 +144,7 @@ namespace TrivialPursuit.Services
                     ctx.Questions.Remove(userEntity);
                     return ctx.SaveChanges() == 1;
                 }
-                var adminEntity = ctx.Questions.Single(e => e.Id == id && e.AuthorId == _userId.ToString());
+                var adminEntity = ctx.Questions.Single(e => e.Id == id);
 
                 ctx.Questions.Remove(adminEntity);
                 return ctx.SaveChanges() == 1;

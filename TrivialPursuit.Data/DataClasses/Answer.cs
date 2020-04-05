@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrivialPursuitMVC.Data;
 
 namespace TrivialPursuit.Data.DataClasses
 {
@@ -16,6 +17,9 @@ namespace TrivialPursuit.Data.DataClasses
         [ForeignKey(nameof(Question))]
         public int QuestiondId { get; set; }
         public virtual Question Question { get; set; }
+        [ForeignKey(nameof(Author))]
+        public string AuthorId { get; set; }
+        public virtual ApplicationUser Author { get; set; }
         public bool IsCorrectSpelling { get; set; }
         public bool IsUserGenerated { get; set; }
     }

@@ -128,10 +128,11 @@ namespace TrivialPursuitMVC.Controllers
             ViewBag.Detail = service.GetQuestionById(id);
             var qmodel = service.GetQuestionById(id);
 
-            var model = new AnswerCreate 
-            { 
+            var model = new AnswerCreate
+            {
                 QuestionId = id,
-            Question = qmodel.Text};
+                Question = qmodel.Text
+            };
             return View(model);
         }
 

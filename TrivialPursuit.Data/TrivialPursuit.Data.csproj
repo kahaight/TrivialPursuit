@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202004041738389_AddTextToAnswer.Designer.cs">
       <DependentUpon>202004041738389_AddTextToAnswer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004051827446_AddAuthorToAnswer.cs" />
+    <Compile Include="Migrations\202004051827446_AddAuthorToAnswer.Designer.cs">
+      <DependentUpon>202004051827446_AddAuthorToAnswer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004041738389_AddTextToAnswer.resx">
       <DependentUpon>202004041738389_AddTextToAnswer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051827446_AddAuthorToAnswer.resx">
+      <DependentUpon>202004051827446_AddAuthorToAnswer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

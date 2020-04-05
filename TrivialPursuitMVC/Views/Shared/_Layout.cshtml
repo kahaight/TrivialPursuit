@@ -27,6 +27,8 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Questions", "Index", "Question")</li>
+
+                        <li>@Html.ActionLink("Answers", "Index", "Answer")</li>
                         <li>
                             @Html.ActionLink("Users", "Index", "User")
                         </li>
@@ -34,7 +36,13 @@
                     @if (User.IsInRole("Player"))
                     {
                         <li>@Html.ActionLink("My Questions", "Index", "Question")</li>
+
+                        <li>@Html.ActionLink("My Answers", "Index", "Answer")</li>
+                        <li>
+                            @Html.ActionLink("Rankings", "Index", "User")
+                        </li>
                     }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
