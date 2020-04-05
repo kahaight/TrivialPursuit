@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TrivialPursuit.Models.Category;
+using TrivialPursuit.Services;
 
 namespace TrivialPursuitMVC.Controllers
 {
@@ -13,8 +14,9 @@ namespace TrivialPursuitMVC.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            var model = new CategoryListItem[0];
-            return View();
+            var service = new CategoryService();
+            var model = service.GetCategories();
+            return View(model);
         }
         public ActionResult Create()
         {
@@ -24,10 +26,14 @@ namespace TrivialPursuitMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoryCreate model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            var service = new CategoryService();
+            if(service.CreateCategory(model))
             {
-
+                ViewBag.SaveResult = "Your category was created.";
+                return RedirectToAction("Index");
             }
+            ModelState.AddModelError("", "Note could not be created.");
             return View(model);
         }
     }

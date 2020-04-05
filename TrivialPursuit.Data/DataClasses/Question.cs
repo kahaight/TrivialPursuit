@@ -20,7 +20,7 @@ namespace TrivialPursuit.Data.DataClasses
         public virtual Category Category { get; set; }
         [ForeignKey(nameof(Version))]
         public int VersionId { get; set; }
-        public virtual Version Version { get; set; }
+        public virtual GameVersion Version { get; set; }
         [ForeignKey(nameof(Author))]
         public string AuthorId { get; set; }
         public virtual ApplicationUser Author { get; set; }

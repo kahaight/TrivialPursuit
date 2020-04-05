@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrivialPursuit.Data.DataClasses
 {
-    public class Version
+    public class GameVersion
     {
         public int Id { get; set; }
         public string Name { get; set; }
