@@ -126,8 +126,12 @@ namespace TrivialPursuitMVC.Controllers
         {
             var service = CreateQuestionService();
             ViewBag.Detail = service.GetQuestionById(id);
+            var qmodel = service.GetQuestionById(id);
 
-            var model = new AnswerCreate { QuestionId = id };
+            var model = new AnswerCreate 
+            { 
+                QuestionId = id,
+            Question = qmodel.Text};
             return View(model);
         }
 
