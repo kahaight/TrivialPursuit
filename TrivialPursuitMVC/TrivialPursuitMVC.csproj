@@ -261,6 +261,8 @@
     <Content Include="Views\Version\Edit.cshtml" />
     <Content Include="Views\Version\Delete.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Shared\_QuestionListPartial.cshtml" />
+    <Content Include="Views\Shared\_QuestionDetailPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

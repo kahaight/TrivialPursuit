@@ -1,0 +1,54 @@
+﻿@using TrivialPursuit.Models.Question
+@model QuestionDetail
+
+<div>
+    <h4>Question Detail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Answers)
+        </dt>
+        <dd>
+            <ul>
+
+                @foreach (var item in Model.Answers)
+                {
+                    <li>
+                        @item
+                    </li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>

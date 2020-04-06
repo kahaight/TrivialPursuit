@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TrivialPursuitMVC.Models.Question.QuestionListItem>
+﻿
+@model IEnumerable<TrivialPursuit.Models.Question.QuestionListItem>
 
 @{
     ViewBag.Title = "Index";
@@ -31,20 +32,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.QuestionId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.QuestionId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.QuestionId }) |
-                @Html.ActionLink("Add Answer", "AddAnswer", new { id=item.QuestionId })
-            </td>
-        </tr>
+        @Html.Partial("_QuestionListPartial", item)
     }
 
 </table>
