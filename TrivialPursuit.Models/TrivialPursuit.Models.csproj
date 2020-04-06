@@ -80,6 +80,8 @@
     <Compile Include="Answer\AnswerEdit.cs" />
     <Compile Include="Answer\AnswerListItem.cs" />
     <Compile Include="Category\CategoryCreate.cs" />
+    <Compile Include="Category\CategoryDetail.cs" />
+    <Compile Include="Category\CategoryEdit.cs" />
     <Compile Include="Category\CategoryListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question\QuestionCreate.cs" />
@@ -88,6 +90,8 @@
     <Compile Include="Question\QuestionListItem.cs" />
     <Compile Include="RoleListItem.cs" />
     <Compile Include="Version\VersionCreate.cs" />
+    <Compile Include="Version\VersionDetail.cs" />
+    <Compile Include="Version\VersionEdit.cs" />
     <Compile Include="Version\VersionListItem.cs" />
   </ItemGroup>
   <ItemGroup>

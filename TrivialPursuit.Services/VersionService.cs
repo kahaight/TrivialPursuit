@@ -14,7 +14,7 @@ namespace TrivialPursuit.Services
     public class VersionService
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
-
+        private readonly QuestionService _questionService = new QuestionService();
         public VersionService() { }
 
         public bool CreateVersion(VersionCreate model)
@@ -54,7 +54,25 @@ namespace TrivialPursuit.Services
                 return query.ToArray();
             }
         }
-
+        public VersionDetail GetVersionById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Versions
+                        .Single(e => e.Id == id);
+                return
+                    new VersionDetail
+                    {
+                        Id = entity.Id,
+                        Name = entity.Name,
+                        Description = entity.Description,
+                        ReleaseYear = entity.ReleaseYear,
+                        Questions = _questionService.GetQuestionsByVersion(entity.Name)
+                    };
+            }
+        }
 
         public int GetVersionIdByName(string versionName)
         {
@@ -62,6 +80,23 @@ namespace TrivialPursuit.Services
             {
                 var version = ctx.Versions.Single(e => e.Name == versionName);
                 return version.Id;
+            }
+        }
+
+        public bool UpdateVersion (VersionEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Versions
+                        .Single(e => e.Id == model.Id);
+
+                entity.Name = model.Name;
+                entity.Description = model.Description;
+                entity.ReleaseYear = model.ReleaseYear;
+
+                return ctx.SaveChanges() == 1;
             }
         }
 

@@ -30,10 +30,53 @@ namespace TrivialPursuitMVC.Controllers
             var service = new VersionService();
             if (service.CreateVersion(model))
             {
-                ViewBag.SaveResult = "Your version was created.";
+                TempData["SaveResult"] = "Your version was created.";
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Note could not be created.");
+            ModelState.AddModelError("", "Version could not be created.");
+            return View(model);
+        }
+        public ActionResult Details(int id)
+        {
+            var svc = new VersionService();
+            var model = svc.GetVersionById(id);
+            return View(model);
+        }
+        public ActionResult Edit(int id)
+        {
+            var svc = new VersionService();
+            var detail = svc.GetVersionById(id);
+            var model =
+                new VersionEdit
+                {
+                    Id = detail.Id,
+                    Name = detail.Name,
+                    Description = detail.Description,
+                    ReleaseYear = detail.ReleaseYear
+                };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, VersionEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var svc = new VersionService();
+
+            if (svc.UpdateVersion(model))
+            {
+                TempData["SaveResult"] = "Your version was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your version could not be updated.");
             return View(model);
         }
     }

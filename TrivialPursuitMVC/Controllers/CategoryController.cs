@@ -28,12 +28,54 @@ namespace TrivialPursuitMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
             var service = new CategoryService();
-            if(service.CreateCategory(model))
+            if (service.CreateCategory(model))
             {
-                ViewBag.SaveResult = "Your category was created.";
+                TempData["SaveResult"] = "Your category was created.";
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Note could not be created.");
+            ModelState.AddModelError("", "Category could not be created.");
+            return View(model);
+        }
+        public ActionResult Details(int id)
+        {
+            var svc = new CategoryService();
+            var model = svc.GetCategoryById(id);
+            return View(model);
+        }
+        public ActionResult Edit(int id)
+        {
+            var svc = new CategoryService();
+            var detail = svc.GetCategoryById(id);
+            var model =
+                new CategoryEdit
+                {
+                    Id = detail.Id,
+                    Name = detail.Name,
+                    Color = detail.Color
+                };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, CategoryEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var svc = new CategoryService();
+
+            if (svc.UpdateCategory(model))
+            {
+                TempData["SaveResult"] = "Your category was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your category could not be updated.");
             return View(model);
         }
     }

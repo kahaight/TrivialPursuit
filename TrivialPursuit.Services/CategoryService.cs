@@ -13,6 +13,7 @@ namespace TrivialPursuit.Services
     public class CategoryService
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly QuestionService _questionService = new QuestionService();
         public CategoryService() { }
 
         public bool CreateCategory(CategoryCreate model)
@@ -50,14 +51,45 @@ namespace TrivialPursuit.Services
                 return query.ToArray();
             }
         }
+        public CategoryDetail GetCategoryById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(e => e.Id == id);
+                return
+                    new CategoryDetail
+                    {
+                        Id = entity.Id,
+                        Name = entity.Name,
+                        Color = entity.Color,
+                        Questions = _questionService.GetQuestionsByCategory(entity.Name)
+                    };
+            }
+        }
+        public bool UpdateCategory(CategoryEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(e => e.Id == model.Id);
 
+                entity.Name = model.Name;
+                entity.Color = model.Color;
 
+                return ctx.SaveChanges() == 1;
+            }
+        }
         public int GetCategoryIdByName(string categoryName)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var category = ctx.Categories.Single(e => e.Name == categoryName);
-            return category.Id;
+                return category.Id;
             }
         }
 

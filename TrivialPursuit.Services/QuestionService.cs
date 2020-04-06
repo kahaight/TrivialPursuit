@@ -12,9 +12,7 @@ namespace TrivialPursuit.Services
 {
     public class QuestionService
     {
-        private readonly CategoryService _categoryService = new CategoryService();
         private readonly UserService _userService = new UserService();
-        private readonly VersionService _versionService = new VersionService();
         private readonly Guid _userId;
         public QuestionService() { }
         public QuestionService(Guid userId)
@@ -24,13 +22,15 @@ namespace TrivialPursuit.Services
 
         public bool CreateQuestion(QuestionCreate model)
         {
+            var csvc = GetCategoryService();
+            var vsvc = GetVersionService();
             var entity =
                 new Question()
                 {
                     AuthorId = _userId.ToString(),
                     Text = model.Text,
-                    CategoryId = _categoryService.GetCategoryIdByName(model.Category),
-                    VersionId = _versionService.GetVersionIdByName(model.Version),
+                    CategoryId = csvc.GetCategoryIdByName(model.Category),
+                    VersionId = vsvc.GetVersionIdByName(model.Version),
                     IsUserGenerated = !_userService.ConfirmUserIsAdmin(_userId.ToString())
                 };
             using (var ctx = new ApplicationDbContext())
@@ -45,25 +45,25 @@ namespace TrivialPursuit.Services
             {
                 if (_userService.ConfirmUserIsAdmin(_userId.ToString()))
                 {
-                var adminQuery =
-                    ctx
-                        .Questions
-                        .Select(
-                            e =>
-                                new QuestionListItem
-                                {
-                                    QuestionId = e.Id,
-                                    Text = e.Text,
-                                }
-                        );
+                    var adminQuery =
+                        ctx
+                            .Questions
+                            .Select(
+                                e =>
+                                    new QuestionListItem
+                                    {
+                                        QuestionId = e.Id,
+                                        Text = e.Text,
+                                    }
+                            );
 
-                return adminQuery.ToArray();
+                    return adminQuery.ToArray();
 
                 }
                 var playerQuery =
                     ctx
                         .Questions
-                        .Where(m=>m.AuthorId == _userId.ToString())
+                        .Where(m => m.AuthorId == _userId.ToString())
                         .Select(
                             e =>
                                 new QuestionListItem
@@ -115,18 +115,70 @@ namespace TrivialPursuit.Services
                     };
             }
         }
+
+        public IEnumerable<QuestionDetail> GetQuestionsByCategory(string categoryName)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var asvc = GetAnswerService();
+                var query =
+                    ctx
+                        .Questions
+                        .Where(e => e.Category.Name == categoryName)
+                        .Select(
+                            e =>
+                                new QuestionDetail
+                                {
+                                    Id = e.Id,
+                                    Text = e.Text,
+                                    Category = e.Category.Name,
+                                    Version = e.Version.Name,
+                                    Author = e.Author.DisplayName,
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
+        public IEnumerable<QuestionDetail> GetQuestionsByVersion(string versionName)
+        {
+            var asvc = GetAnswerService();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Questions
+                        .Where(e => e.Version.Name == versionName)
+                        .Select(
+                            e =>
+                                new QuestionDetail
+                                {
+                                    Id = e.Id,
+                                    Text = e.Text,
+                                    Category = e.Category.Name,
+                                    Version = e.Version.Name,
+                                    Author = e.Author.DisplayName,
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
         public bool UpdateQuestion(QuestionEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var vsvc = GetVersionService();
+                var csvc = GetCategoryService();
                 var entity =
                     ctx
                         .Questions
                         .Single(e => e.Id == model.Id && e.AuthorId == _userId.ToString());
 
                 entity.Text = model.Text;
-                entity.CategoryId = _categoryService.GetCategoryIdByName(model.Category);
-                entity.VersionId = _versionService.GetVersionIdByName(model.Version);
+                entity.CategoryId = csvc.GetCategoryIdByName(model.Category);
+                entity.VersionId = vsvc.GetVersionIdByName(model.Version);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -149,6 +201,18 @@ namespace TrivialPursuit.Services
                 ctx.Questions.Remove(adminEntity);
                 return ctx.SaveChanges() == 1;
             }
+        }
+        private CategoryService GetCategoryService()
+        {
+            return new CategoryService();
+        }
+        private VersionService GetVersionService()
+        {
+            return new VersionService();
+        }
+        private AnswerService GetAnswerService()
+        {
+            return new AnswerService();
         }
     }
 }
