@@ -78,5 +78,24 @@ namespace TrivialPursuitMVC.Controllers
             ModelState.AddModelError("", "Your category could not be updated.");
             return View(model);
         }
+        public ActionResult Delete(int id)
+        {
+            var svc = new CategoryService();
+            var model = svc.GetCategoryById(id);
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCategory(int id)
+        {
+            var svc = new CategoryService();
+
+            svc.DeleteCategory(id);
+
+            TempData["SaveResult"] = "Your category was deleted";
+
+            return RedirectToAction("Index");
+        }
     }
 }

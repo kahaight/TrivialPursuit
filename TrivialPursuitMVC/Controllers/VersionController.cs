@@ -79,5 +79,24 @@ namespace TrivialPursuitMVC.Controllers
             ModelState.AddModelError("", "Your version could not be updated.");
             return View(model);
         }
+        public ActionResult Delete(int id)
+        {
+            var svc = new VersionService();
+            var model = svc.GetVersionById(id);
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteVersion(int id)
+        {
+            var svc = new VersionService();
+
+            svc.DeleteVersion(id);
+
+            TempData["SaveResult"] = "Your version was deleted";
+
+            return RedirectToAction("Index");
+        }
     }
 }

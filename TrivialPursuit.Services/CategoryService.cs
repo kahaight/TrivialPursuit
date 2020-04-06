@@ -84,6 +84,20 @@ namespace TrivialPursuit.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public bool DeleteCategory(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(e => e.Id == id);
+
+                ctx.Categories.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
         public int GetCategoryIdByName(string categoryName)
         {
             using (var ctx = new ApplicationDbContext())

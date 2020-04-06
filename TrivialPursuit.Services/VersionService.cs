@@ -99,6 +99,20 @@ namespace TrivialPursuit.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public bool DeleteVersion(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Versions
+                        .Single(e => e.Id == id);
+
+                ctx.Versions.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
         public List<SelectListItem> GetVersionStrings()
         {
