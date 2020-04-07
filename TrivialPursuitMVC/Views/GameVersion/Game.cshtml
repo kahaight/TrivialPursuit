@@ -1,0 +1,49 @@
+﻿@using TrivialPursuit.Models.Game
+@model Game
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Game</title>
+</head>
+<body>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                Game Version:
+            </dt>
+            <dd>
+                @Model.GameVersion
+            </dd>
+            <dt>
+                Player:
+            </dt>
+            <dd>
+                @Model.GetPlayerDisplayName(Model.PlayerId)
+            </dd>
+            <dt>
+                Version Questions:
+            </dt>
+            <dd>
+                <ul>
+
+
+                @foreach (var item in Model.Questions)
+                {
+                    <li>
+
+                    @item.Text
+                    </li>
+                }
+
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</body>
+</html>

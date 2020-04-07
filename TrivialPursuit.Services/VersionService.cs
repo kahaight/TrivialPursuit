@@ -83,6 +83,15 @@ namespace TrivialPursuit.Services
             }
         }
 
+        public string GetVersionNameById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var version = ctx.Versions.Single(e => e.Id == id);
+                return version.Name;
+            }
+        }
+
         public bool UpdateVersion (VersionEdit model)
         {
             using (var ctx = new ApplicationDbContext())

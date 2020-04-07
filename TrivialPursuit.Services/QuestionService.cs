@@ -25,7 +25,7 @@ namespace TrivialPursuit.Services
             var csvc = GetCategoryService();
             var vsvc = GetVersionService();
             var entity =
-                new Question()
+                new Data.DataClasses.Question()
                 {
                     AuthorId = _userId.ToString(),
                     Text = model.Text,
@@ -150,6 +150,31 @@ namespace TrivialPursuit.Services
                     ctx
                         .Questions
                         .Where(e => e.Version.Name == versionName)
+                        .Select(
+                            e =>
+                                new QuestionDetail
+                                {
+                                    Id = e.Id,
+                                    Text = e.Text,
+                                    Category = e.Category.Name,
+                                    Version = e.Version.Name,
+                                    Author = e.Author.DisplayName,
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
+        public IEnumerable<QuestionDetail> GetQuestionsByVersionId(int id)
+        {
+            var asvc = GetAnswerService();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Questions
+                        .Where(e => e.Version.Id == id)
                         .Select(
                             e =>
                                 new QuestionDetail

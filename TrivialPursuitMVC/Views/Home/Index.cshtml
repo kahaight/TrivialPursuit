@@ -3,29 +3,27 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Trivial Pursuit</h1>
+    <p class="lead">Play a round of trivial pursuit to beef up your trivia knowledge. Don't look like a fool at your local bar's trivia night ever again.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Trivial_Pursuit" class="btn btn-primary btn-lg">Learn more about the original game &raquo;</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Make your own questions!</h2>
+        <p>Add your own questions that others will be able to enjoy, but only you will be able to edit!</p>
+        <p><a href='@Url.Action("Index", "Question")' class="btn btn-primary">See My Questions</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Player Rankings</h2>
+        <p>Compare your trivia success to other players, rankings by category coming soon!</p>
+        <p> <a href='@Url.Action("Index", "User")' class="btn btn-primary">See Rankings</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Add Answers</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            View the answers you've created and add new ones, multiple answers might allow for spelling errors when resonding!'
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <p><a href='@Url.Action("Index", "Answer")' class="btn btn-primary">See My Answers</a></p>
     </div>
 </div>

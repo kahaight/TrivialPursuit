@@ -13,7 +13,7 @@ namespace TrivialPursuit.Services
     public class CategoryService
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
-        private readonly QuestionService _questionService = new QuestionService();
+
         public CategoryService() { }
 
         public bool CreateCategory(CategoryCreate model)
@@ -55,6 +55,7 @@ namespace TrivialPursuit.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var qsvc = GetQuestionService();
                 var entity =
                     ctx
                         .Categories
@@ -65,7 +66,7 @@ namespace TrivialPursuit.Services
                         Id = entity.Id,
                         Name = entity.Name,
                         Color = entity.Color,
-                        Questions = _questionService.GetQuestionsByCategory(entity.Name)
+                        Questions = qsvc.GetQuestionsByCategory(entity.Name)
                     };
             }
         }
@@ -121,6 +122,9 @@ namespace TrivialPursuit.Services
             return versions;
         }
 
-
+        public QuestionService GetQuestionService()
+        {
+            return new QuestionService();
+        }
     }
 }
