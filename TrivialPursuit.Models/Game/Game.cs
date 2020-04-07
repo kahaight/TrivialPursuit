@@ -14,13 +14,22 @@ namespace TrivialPursuit.Models.Game
         public string GameVersion { get; set; }
         public IEnumerable<QuestionDetail> Questions { get; set; }
         public string PlayerId { get; set; }
+        public string PlayerName
+        {
+            get
+            {
+                return GetPlayerDisplayName(PlayerId);
+            }
+        }
 
-        public string GetPlayerDisplayName(string playerId)
+        private string GetPlayerDisplayName(string playerId)
         {
             var ctx = new ApplicationDbContext();
             var query = ctx.Users.Single(e => e.Id == playerId);
             return query.DisplayName;
         }
+
+        
 
     }
 

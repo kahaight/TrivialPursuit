@@ -5,7 +5,15 @@
 <div class="jumbotron">
     <h1>Trivial Pursuit</h1>
     <p class="lead">Play a round of trivial pursuit to beef up your trivia knowledge. Don't look like a fool at your local bar's trivia night ever again.</p>
-    <p><a href="https://en.wikipedia.org/wiki/Trivial_Pursuit" class="btn btn-primary btn-lg">Learn more about the original game &raquo;</a></p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p><a href='@Url.Action("Index", "GameVersion")' class="btn btn-primary">Start Playing Now</a></p>
+    }
+    @if (!User.Identity.IsAuthenticated)
+    {
+
+    <p><a href='@Url.Action("Register", "Account")' class="btn btn-primary">Register To Start Playing Now</a></p>
+    }
 </div>
 
 <div class="row">
