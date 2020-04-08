@@ -12,38 +12,74 @@
     <title>Game</title>
 </head>
 <body>
+    @*<div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Game Version:
+                </dt>
+                <dd>
+                    @Model.GameVersion
+                </dd>
+                <dt>
+                    Player:
+                </dt>
+                <dd>
+                    @Model.PlayerName
+                </dd>
+                <dt>
+                    Version Questions:
+                </dt>
+                <dd>
+                    <ul>
+
+
+                    @foreach (var item in Model.Questions)
+                    {
+                        <li>
+
+                        @item.Text
+                        </li>
+                    }
+
+                    </ul>
+                </dd>
+            </dl>
+        </div>*@
     <div>
-        <dl class="dl-horizontal">
-            <dt>
-                Game Version:
-            </dt>
-            <dd>
-                @Model.GameVersion
-            </dd>
-            <dt>
-                Player:
-            </dt>
-            <dd>
-                @Model.PlayerName
-            </dd>
-            <dt>
-                Version Questions:
-            </dt>
-            <dd>
-                <ul>
+        @if (TempData.ContainsKey("Test"))
+        {
+            <div class="alert alert-success fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["Test"]
+            </div>
+        }
+    </div>
+    <div>
+        @{
+            var question = Model.GetRandomQuestion();
+        }
+        @question.Text
+    </div>
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlayerAnswer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PlayerAnswer, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
 
-
-                @foreach (var item in Model.Questions)
-                {
-                    <li>
-
-                    @item.Text
-                    </li>
-                }
-
-                </ul>
-            </dd>
-        </dl>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit Answer" class="btn btn-default" />
+            </div>
+        </div>
     </div>
 </body>
 </html>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -196,17 +196,30 @@ namespace TrivialPursuit.Services
             {
                 var vsvc = GetVersionService();
                 var csvc = GetCategoryService();
-                var entity =
+                if (!_userService.ConfirmUserIsAdmin(_userId.ToString()))
+                {
+                    var playerEntity =
+                         ctx
+                             .Questions
+                             .Single(e => e.Id == model.Id && e.AuthorId == _userId.ToString());
+                    playerEntity.Text = model.Text;
+                    playerEntity.CategoryId = csvc.GetCategoryIdByName(model.Category);
+                    playerEntity.VersionId = vsvc.GetVersionIdByName(model.Version);
+                    return ctx.SaveChanges() == 1;
+                }
+                var adminEntity =
                     ctx
                         .Questions
-                        .Single(e => e.Id == model.Id && e.AuthorId == _userId.ToString());
-
-                entity.Text = model.Text;
-                entity.CategoryId = csvc.GetCategoryIdByName(model.Category);
-                entity.VersionId = vsvc.GetVersionIdByName(model.Version);
+                        .Single(e => e.Id == model.Id);
+                adminEntity.Text = model.Text;
+                adminEntity.CategoryId = csvc.GetCategoryIdByName(model.Category);
+                adminEntity.VersionId = vsvc.GetVersionIdByName(model.Version);
                 return ctx.SaveChanges() == 1;
             }
         }
+
+
+
         public bool DeleteQuestion(int id)
         {
             using (var ctx = new ApplicationDbContext())

@@ -15,5 +15,6 @@ namespace TrivialPursuit.Models.Question
         public string Version { get; set; }
         public string Author { get; set; }
         public IEnumerable<string> Answers { get; set; }
+        public string PlayerAnswer { get; set; }
     }
 }

@@ -61,6 +61,8 @@ namespace TrivialPursuitMVC.Controllers
         }
         public ActionResult Edit(int id)
         {
+            ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             var service = CreateQuestionService();
             var detail = service.GetQuestionById(id);
             var model =
@@ -70,8 +72,7 @@ namespace TrivialPursuitMVC.Controllers
                     Text = detail.Text,
                     Category = detail.Category,
                     Version = detail.Version,
-                    Categories = _categoryService.GetCategoryStrings(),
-                    Versions = _versionService.GetVersionStrings()
+
                 };
             return View(model);
         }
@@ -79,6 +80,8 @@ namespace TrivialPursuitMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, QuestionEdit model)
         {
+            ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
+            ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             if (!ModelState.IsValid) return View(model);
             if (model.Id != id)
             {
