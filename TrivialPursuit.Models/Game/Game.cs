@@ -16,7 +16,7 @@ namespace TrivialPursuit.Models.Game
         private Random _random = new Random();
 
         public string GameVersion { get; set; }
-        public IEnumerable<QuestionDetail> Questions { get; set; }
+        public virtual IEnumerable<QuestionDetail> Questions { get; set; }
         public string PlayerId { get; set; }
         public string PlayerName
         {

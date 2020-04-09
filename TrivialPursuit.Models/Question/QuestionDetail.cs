@@ -14,7 +14,6 @@ namespace TrivialPursuit.Models.Question
         public string Category { get; set; }
         public string Version { get; set; }
         public string Author { get; set; }
-        public IEnumerable<string> Answers { get; set; }
-        public string PlayerAnswer { get; set; }
+        public ICollection<TrivialPursuit.Data.DataClasses.Answer> Answers { get; set; }
     }
 }

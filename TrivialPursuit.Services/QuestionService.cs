@@ -96,7 +96,7 @@ namespace TrivialPursuit.Services
                             Category = playerEntity.Category.Name,
                             Version = playerEntity.Version.Name,
                             Author = playerEntity.Author.DisplayName,
-                            Answers = asvc.ConvertAnswersToStrings(playerEntity.Answers)
+                            Answers = playerEntity.Answers
                         };
                 }
                 var adminEntity =
@@ -111,7 +111,7 @@ namespace TrivialPursuit.Services
                         Category = adminEntity.Category.Name,
                         Version = adminEntity.Version.Name,
                         Author = adminEntity.Author.DisplayName,
-                        Answers = asvc.ConvertAnswersToStrings(adminEntity.Answers)
+                        Answers = adminEntity.Answers
                     };
             }
         }
@@ -134,6 +134,7 @@ namespace TrivialPursuit.Services
                                     Category = e.Category.Name,
                                     Version = e.Version.Name,
                                     Author = e.Author.DisplayName,
+                                    Answers = e.Answers
                                 }
                         );
 
@@ -159,6 +160,7 @@ namespace TrivialPursuit.Services
                                     Category = e.Category.Name,
                                     Version = e.Version.Name,
                                     Author = e.Author.DisplayName,
+                                    Answers = e.Answers
                                 }
                         );
 
@@ -184,6 +186,7 @@ namespace TrivialPursuit.Services
                                     Category = e.Category.Name,
                                     Version = e.Version.Name,
                                     Author = e.Author.DisplayName,
+                                   Answers = e.Answers
                                 }
                         );
 

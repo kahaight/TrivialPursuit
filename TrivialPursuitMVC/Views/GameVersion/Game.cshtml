@@ -60,7 +60,11 @@
         @{
             var question = Model.GetRandomQuestion();
         }
-        @question.Text
+        @question.Text <br/>
+        @foreach(var answer in question.Answers)
+        {
+            @answer.Text
+        };
     </div>
     <div>
         <div class="form-group">

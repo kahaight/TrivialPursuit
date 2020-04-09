@@ -30,11 +30,15 @@ namespace TrivialPursuitMVC.Controllers
             model.PlayerId = User.Identity.GetUserId();
             return View(model);
         }
-
+        
         public ActionResult SubmitAnswer(string answer)
         {
             TempData["Test"] = $"Your answer was {answer}";
             return View();
+
+            //Increment the correct color in the ApplicationUser for correct and total
+            //Return to the view with TempData telling them whether or not they were correct and the correct spelling of the correct answer
+
         }
 
     }
