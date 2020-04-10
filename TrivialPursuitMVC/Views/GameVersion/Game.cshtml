@@ -12,41 +12,8 @@
     <title>Game</title>
 </head>
 <body>
-    @*<div>
-            <dl class="dl-horizontal">
-                <dt>
-                    Game Version:
-                </dt>
-                <dd>
-                    @Model.GameVersion
-                </dd>
-                <dt>
-                    Player:
-                </dt>
-                <dd>
-                    @Model.PlayerName
-                </dd>
-                <dt>
-                    Version Questions:
-                </dt>
-                <dd>
-                    <ul>
 
-
-                    @foreach (var item in Model.Questions)
-                    {
-                        <li>
-
-                        @item.Text
-                        </li>
-                    }
-
-                    </ul>
-                </dd>
-            </dl>
-        </div>*@
-    <div>
-        @if (TempData.ContainsKey("Test"))
+        @*@if (TempData.ContainsKey("Test"))
         {
             <div class="alert alert-success fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert">
@@ -54,8 +21,32 @@
                 </button>
                 @TempData["Test"]
             </div>
-        }
-    </div>
+        }*@
+   
+
+    @*We are getting the random question client side, so lets evaluate it client side
+        Client Side we need to:
+        - allow the user to submit the information that the controller needs
+        - check the submitted answer is contained within the list of answers connected to the question, return bool for isCorrect?
+        - send the bool as well as category or category color back to the controller 
+
+        Our Server Side needs:
+        Right or Wrong
+        Question.Category.Color
+
+        Server side we need to:
+        increment the counts of questions answered and questions answered correctly
+        return to the view with the correct answer (and whether or not they got it correct), 
+
+        View needs to:
+        use if statement to present information on previous question (if they got it correct and what the correctly spelled correct anser is)
+        pull new random question and start the process over again
+
+
+
+        *@
+
+
     <div>
         @{
             var question = Model.GetRandomQuestion();
@@ -66,6 +57,7 @@
             @answer.Text
         };
     </div>
+    
     <div>
         <div class="form-group">
             @Html.LabelFor(model => model.PlayerAnswer, htmlAttributes: new { @class = "control-label col-md-2" })

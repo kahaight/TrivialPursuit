@@ -93,9 +93,9 @@ namespace TrivialPursuit.Services
                         {
                             Id = playerEntity.Id,
                             Text = playerEntity.Text,
-                            Category = playerEntity.Category.Name,
-                            Version = playerEntity.Version.Name,
-                            Author = playerEntity.Author.DisplayName,
+                            Category = playerEntity.Category,
+                            GameVersion = playerEntity.Version,
+                            Author = playerEntity.Author,
                             Answers = playerEntity.Answers
                         };
                 }
@@ -108,9 +108,9 @@ namespace TrivialPursuit.Services
                     {
                         Id = adminEntity.Id,
                         Text = adminEntity.Text,
-                        Category = adminEntity.Category.Name,
-                        Version = adminEntity.Version.Name,
-                        Author = adminEntity.Author.DisplayName,
+                        Category = adminEntity.Category,
+                        GameVersion = adminEntity.Version,
+                        Author = adminEntity.Author,
                         Answers = adminEntity.Answers
                     };
             }
@@ -131,9 +131,9 @@ namespace TrivialPursuit.Services
                                 {
                                     Id = e.Id,
                                     Text = e.Text,
-                                    Category = e.Category.Name,
-                                    Version = e.Version.Name,
-                                    Author = e.Author.DisplayName,
+                                    Category = e.Category,
+                                    GameVersion = e.Version,
+                                    Author = e.Author,
                                     Answers = e.Answers
                                 }
                         );
@@ -157,9 +157,9 @@ namespace TrivialPursuit.Services
                                 {
                                     Id = e.Id,
                                     Text = e.Text,
-                                    Category = e.Category.Name,
-                                    Version = e.Version.Name,
-                                    Author = e.Author.DisplayName,
+                                    Category = e.Category,
+                                    GameVersion = e.Version,
+                                    Author = e.Author,
                                     Answers = e.Answers
                                 }
                         );
@@ -183,9 +183,9 @@ namespace TrivialPursuit.Services
                                 {
                                     Id = e.Id,
                                     Text = e.Text,
-                                    Category = e.Category.Name,
-                                    Version = e.Version.Name,
-                                    Author = e.Author.DisplayName,
+                                    Category = e.Category,
+                                    GameVersion = e.Version,
+                                    Author = e.Author,
                                    Answers = e.Answers
                                 }
                         );

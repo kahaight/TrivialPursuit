@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrivialPursuit.Data.DataClasses;
+using TrivialPursuitMVC.Data;
 
 namespace TrivialPursuit.Models.Question
 {
@@ -11,9 +12,9 @@ namespace TrivialPursuit.Models.Question
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public string Category { get; set; }
-        public string Version { get; set; }
-        public string Author { get; set; }
+        public TrivialPursuit.Data.DataClasses.Category Category { get; set; }
+        public GameVersion GameVersion { get; set; }
+        public ApplicationUser Author { get; set; }
         public ICollection<TrivialPursuit.Data.DataClasses.Answer> Answers { get; set; }
     }
 }

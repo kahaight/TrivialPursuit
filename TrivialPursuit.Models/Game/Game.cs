@@ -27,6 +27,7 @@ namespace TrivialPursuit.Models.Game
         }
         [DisplayName("Answer:")]
         public string PlayerAnswer { get; set; }
+        public int CurrentQuestionId { get; set; }
 
         private string GetPlayerDisplayName(string playerId)
         {

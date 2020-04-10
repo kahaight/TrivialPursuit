@@ -70,8 +70,8 @@ namespace TrivialPursuitMVC.Controllers
                 {
                     Id = detail.Id,
                     Text = detail.Text,
-                    Category = detail.Category,
-                    Version = detail.Version,
+                    Category = detail.Category.Name,
+                    Version = detail.GameVersion.Name,
 
                 };
             return View(model);
