@@ -27,11 +27,15 @@ namespace TrivialPursuitMVC.Controllers
         public ActionResult Game(int id)
         {
             var svc = new GameService();
-            var model = svc.GetGame(id);
-            model.PlayerId = User.Identity.GetUserId();
-            return View(model);
+            var gameModel = new TrivialPursuit.Models.Game.AnswerSubmit()
+            {
+                Game = svc.GetGame(id)
+            };
+            gameModel.Game.PlayerId = User.Identity.GetUserId();
+            
+            return View(gameModel);
         }
-
+        //Post method, because if it is not redirecting to the Game method, it will Post to our Database, or maybe it posts to our database every iteration
         public ActionResult SubmitAnswer(string answer)
         {
             TempData["Test"] = $"Your answer was {answer}";

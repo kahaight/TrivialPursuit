@@ -265,11 +265,11 @@
     <Content Include="Views\Shared\_QuestionListPartial.cshtml" />
     <Content Include="Views\Shared\_QuestionDetailPartial.cshtml" />
     <Content Include="Views\GameVersion\Index.cshtml" />
-    <Content Include="Views\GameVersion\Game.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Game\" />
+    <Folder Include="Views\UnusedView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
