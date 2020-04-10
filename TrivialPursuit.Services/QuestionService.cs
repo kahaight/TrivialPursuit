@@ -96,6 +96,7 @@ namespace TrivialPursuit.Services
                             Category = playerEntity.Category,
                             GameVersion = playerEntity.Version,
                             Author = playerEntity.Author,
+                            IsUserGenerated = playerEntity.IsUserGenerated,
                             Answers = playerEntity.Answers
                         };
                 }
@@ -111,6 +112,7 @@ namespace TrivialPursuit.Services
                         Category = adminEntity.Category,
                         GameVersion = adminEntity.Version,
                         Author = adminEntity.Author,
+                        IsUserGenerated = adminEntity.IsUserGenerated,
                         Answers = adminEntity.Answers
                     };
             }
@@ -134,6 +136,7 @@ namespace TrivialPursuit.Services
                                     Category = e.Category,
                                     GameVersion = e.Version,
                                     Author = e.Author,
+                                    IsUserGenerated = e.IsUserGenerated,
                                     Answers = e.Answers
                                 }
                         );
@@ -160,6 +163,7 @@ namespace TrivialPursuit.Services
                                     Category = e.Category,
                                     GameVersion = e.Version,
                                     Author = e.Author,
+                                    IsUserGenerated = e.IsUserGenerated,
                                     Answers = e.Answers
                                 }
                         );
@@ -168,7 +172,7 @@ namespace TrivialPursuit.Services
             }
         }
 
-        public IEnumerable<QuestionDetail> GetQuestionsByVersionId(int id)
+        public List<QuestionDetail> GetQuestionsByVersionId(int id)
         {
             var asvc = GetAnswerService();
             using (var ctx = new ApplicationDbContext())
@@ -186,11 +190,12 @@ namespace TrivialPursuit.Services
                                     Category = e.Category,
                                     GameVersion = e.Version,
                                     Author = e.Author,
+                                    IsUserGenerated = e.IsUserGenerated,
                                    Answers = e.Answers
                                 }
                         );
 
-                return query.ToArray();
+                return query.ToList();
             }
         }
         public bool UpdateQuestion(QuestionEdit model)

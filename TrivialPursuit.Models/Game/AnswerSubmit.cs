@@ -11,11 +11,22 @@ namespace TrivialPursuit.Models.Game
     public class AnswerSubmit // this object is instantiated when a new game is started
     {
         public Game Game { get; set; }
-        public List<QuestionDetail> AnsweredQuestions { get; set; }
+        public List<QuestionDetail> AnsweredQuestions { get; set; } = new List<QuestionDetail>();
         public string Answer { get; set; }
         public bool IsCorrect { get; set; } // may not need this
         public QuestionDetail CurrentQuestion { get; set; } // may not need this
-        public bool GameOver { get; set; }
+                                                            //DefaultValue False
+
+
+        public bool EvaluateAnswer(string answer)
+        {
+            //Current question is null which means it isn't being assigned in the view
+            if (CurrentQuestion.Answers.Single(e => e.Text.ToLower() == answer.ToLower()) != null)
+            {
+                return true;
+            }
+            return false;
+        }
 
         // public bool GameOver maybe the default value is false, when we call our controller method we will toggle it to true
 
@@ -31,10 +42,10 @@ namespace TrivialPursuit.Models.Game
         //if end game condition is met, we will toggle GameOver to True
         //if GameOver is True return View for end of game, Post to DataBase
         //if GameOver is false redirectToAction(Game) will need to give it a route value for model.game.id
-        
+
         // Were gonna need a new Action Method for ongoing game
         //OngoingGame Action Method will need a conditional for ifAnswerSubmit.GameOver == false
-        
+
         //
         //we will need to use route values to pass our AnswerSubmit model around to the different methods and views with out instantiating a new game
 

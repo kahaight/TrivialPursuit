@@ -15,6 +15,7 @@ namespace TrivialPursuit.Models.Question
         public TrivialPursuit.Data.DataClasses.Category Category { get; set; }
         public GameVersion GameVersion { get; set; }
         public ApplicationUser Author { get; set; }
+        public bool IsUserGenerated { get; set; }
         public ICollection<TrivialPursuit.Data.DataClasses.Answer> Answers { get; set; }
     }
 }

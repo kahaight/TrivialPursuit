@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,10 @@ namespace TrivialPursuit.Models.Game
         private Random _random = new Random();
 
         public string GameVersion { get; set; }
-        public virtual IEnumerable<QuestionDetail> Questions { get; set; }
+        public virtual List<QuestionDetail> Questions { get; set; }
+        [ForeignKey(nameof(Player))]
         public string PlayerId { get; set; }
+        public virtual ApplicationUser Player { get; set; }
         public string PlayerName
         {
             get
@@ -25,9 +28,9 @@ namespace TrivialPursuit.Models.Game
                 return GetPlayerDisplayName(PlayerId);
             }
         }
-        [DisplayName("Answer:")]
-        public string PlayerAnswer { get; set; }
-        public int CurrentQuestionId { get; set; }
+        [DefaultValue(false)]
+        public bool GameOver { get; set; }
+        public Pie Pie { get; set; } = new Pie();
 
         private string GetPlayerDisplayName(string playerId)
         {
