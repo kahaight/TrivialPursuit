@@ -39,9 +39,9 @@ namespace TrivialPursuitMVC.Controllers
             //Increment the correct color in the ApplicationUser for correct and total
             //Return to the view with TempData telling them whether or not they were correct and the correct spelling of the correct answer, to do so will have to get the user
             //need to have access to the question here so that I can know the category/color to know how to increment the points
-            var user = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             var ctx = new ApplicationDbContext();
-            var player = ctx.Users.Single(e => e.Id == user);
+            var player = ctx.Users.Single(e => e.Id == userId);
 
             //if (!question.IsUserGenerated)
             //{
