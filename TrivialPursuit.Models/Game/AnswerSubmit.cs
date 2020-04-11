@@ -15,7 +15,16 @@ namespace TrivialPursuit.Models.Game
         public string Answer { get; set; }
         public bool IsCorrect { get; set; } // may not need this
         public QuestionDetail CurrentQuestion { get; set; } // may not need this
-                                                            //DefaultValue False
+               //DefaultValue False
+
+
+            // Casey Added these two constructors
+            //public AnswerSubmit(){ }
+        //public AnswerSubmit(Game game)
+        //{
+        //    Game = game;
+        //}
+
 
 
         public bool EvaluateAnswer(string answer)

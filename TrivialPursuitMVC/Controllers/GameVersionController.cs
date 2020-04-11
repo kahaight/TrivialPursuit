@@ -21,6 +21,7 @@ namespace TrivialPursuitMVC.Controllers
             {
                 Versions = svc.GetVersions()
             };
+           
             return View(model);
         }
 
@@ -35,6 +36,10 @@ namespace TrivialPursuitMVC.Controllers
                 Game = svc.GetGame(id)
             };
             gameModel.Game.PlayerId = User.Identity.GetUserId();
+            //generate our random questions
+            // StaticGame.AnswerSubmit = gameModel;
+
+          
 
             return View(gameModel); 
         }
@@ -51,7 +56,10 @@ namespace TrivialPursuitMVC.Controllers
         {
             var x = ViewBag.Model;
             gameModel.IsCorrect = gameModel.EvaluateAnswer(gameModel.Answer);
-
+            //StaticGame.AnswerSubmit.Answer = gameModel.Answer
+            //evaluate the answer
+            //then run our pie system
+            //redirect to Action
 
             var ctx = new ApplicationDbContext();
             if (!gameModel.CurrentQuestion.IsUserGenerated)
