@@ -7,7 +7,7 @@
     <p class="lead">Play a round of trivial pursuit to beef up your trivia knowledge. Don't look like a fool at your local bar's trivia night ever again.</p>
     @if (User.Identity.IsAuthenticated)
     {
-        <p><a href='@Url.Action("Index", "GameVersion")' class="btn btn-primary">Start Playing Now</a></p>
+        <p><a href='@Url.Action("Index", "GameBase")' class="btn btn-primary">Start Playing Now</a></p>
     }
     @if (!User.Identity.IsAuthenticated)
     {

@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="DataClasses\Answer.cs" />
     <Compile Include="DataClasses\Category.cs" />
+    <Compile Include="DataClasses\GameBase.cs" />
     <Compile Include="DataClasses\Pie.cs" />
     <Compile Include="DataClasses\Question.cs" />
     <Compile Include="DataClasses\GameVersion.cs" />
@@ -96,6 +97,10 @@
     <Compile Include="Migrations\202004052137090_RenameVersiontoGameVersion.Designer.cs">
       <DependentUpon>202004052137090_RenameVersiontoGameVersion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004110516418_AddedGameBase.cs" />
+    <Compile Include="Migrations\202004110516418_AddedGameBase.Designer.cs">
+      <DependentUpon>202004110516418_AddedGameBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -130,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004052137090_RenameVersiontoGameVersion.resx">
       <DependentUpon>202004052137090_RenameVersiontoGameVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004110516418_AddedGameBase.resx">
+      <DependentUpon>202004110516418_AddedGameBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

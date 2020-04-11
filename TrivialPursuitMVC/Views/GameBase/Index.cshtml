@@ -1,0 +1,34 @@
+﻿@model TrivialPursuit.Models.GameBaseModels.GameMenuModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>GameMenuModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameBaseId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameBaseId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GameBaseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

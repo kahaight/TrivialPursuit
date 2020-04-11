@@ -25,7 +25,7 @@ namespace TrivialPursuit.Services
             var csvc = GetCategoryService();
             var vsvc = GetVersionService();
             var entity =
-                new Data.DataClasses.Question()
+                new Question()
                 {
                     AuthorId = _userId.ToString(),
                     Text = model.Text,

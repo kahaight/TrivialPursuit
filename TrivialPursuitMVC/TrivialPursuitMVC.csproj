@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\GameBaseController.cs" />
     <Compile Include="Controllers\GameVersionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -266,6 +267,8 @@
     <Content Include="Views\Shared\_QuestionListPartial.cshtml" />
     <Content Include="Views\Shared\_QuestionDetailPartial.cshtml" />
     <Content Include="Views\GameVersion\Index.cshtml" />
+    <Content Include="Views\GameBase\Index.cshtml" />
+    <Content Include="Views\GameBase\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

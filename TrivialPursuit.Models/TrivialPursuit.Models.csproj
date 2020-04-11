@@ -83,6 +83,8 @@
     <Compile Include="Category\CategoryDetail.cs" />
     <Compile Include="Category\CategoryEdit.cs" />
     <Compile Include="Category\CategoryListItem.cs" />
+    <Compile Include="GameBaseModels\GameEditModel.cs" />
+    <Compile Include="GameBaseModels\GameMenuModel.cs" />
     <Compile Include="Game\AnswerSubmit.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameVersionSelect.cs" />
@@ -107,5 +109,6 @@
       <Name>TrivialPursuit.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
