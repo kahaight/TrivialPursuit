@@ -78,7 +78,7 @@ namespace TrivialPursuit.Services
         {
             if (!gameModel.Question.IsUserGenerated)
             {
-                switch (gameModel.Question.Category.Color)
+                switch (gameModel.CategoryColor)
                 {
                     case "Blue":
                         player.BlueAnswered++;

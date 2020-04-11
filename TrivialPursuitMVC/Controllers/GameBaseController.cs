@@ -54,13 +54,15 @@ namespace TrivialPursuitMVC.Controllers
                 detail.QuestionId = question.Id;
                 detail.Question.Text = question.Text;
                 detail.Question.Answers = question.Answers;
+                detail.Question.Category.Color = question.Category.Color;
                 var repeatModel =
                     new GameEditModel
                     {
                         GameBaseId = detail.GameBaseId,
                         GameVersionId = detail.GameVersionId,
                         QuestionId = detail.QuestionId,
-                        Question = detail.Question
+                        Question = detail.Question,
+                        CategoryColor = detail.Question.Category.Color
 
                     };
                 return View(repeatModel);

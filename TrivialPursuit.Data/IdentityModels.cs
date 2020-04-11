@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -26,17 +27,29 @@ namespace TrivialPursuitMVC.Data
                 return BlueAnswered + PinkAnswered + YellowAnswered + BrownAnswered + GreenAnswered + OrangeAnswered;
             }
         }
+        [DefaultValue(0)]
         public int? BlueCorrect { get; set; }
+        [DefaultValue(0)]
         public int? PinkCorrect { get; set; }
+        [DefaultValue(0)]
         public int? YellowCorrect { get; set; }
+        [DefaultValue(0)]
         public int? BrownCorrect { get; set; }
-        public int? GreenCorrect {get; set;}
+        [DefaultValue(0)]
+        public int? GreenCorrect {get; set; }
+        [DefaultValue(0)]
         public int? OrangeCorrect { get; set; }
+        [DefaultValue(0)]
         public int? BlueAnswered { get; set; }
+        [DefaultValue(0)]
         public int? PinkAnswered { get; set; }
+        [DefaultValue(0)]
         public int? YellowAnswered { get; set; }
+        [DefaultValue(0)]
         public int? BrownAnswered { get; set; }
+        [DefaultValue(0)]
         public int? GreenAnswered { get; set; }
+        [DefaultValue(0)]
         public int? OrangeAnswered { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

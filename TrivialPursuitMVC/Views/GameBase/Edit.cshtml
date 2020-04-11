@@ -33,6 +33,7 @@
     @if (Model.GameVersionId != null)
     {
         @Html.HiddenFor(model => model.GameVersionId)
+        @Html.HiddenFor(model => model.CategoryColor)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Question, htmlAttributes: new { @class = "control-label col-md-2" })
