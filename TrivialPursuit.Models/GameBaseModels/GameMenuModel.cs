@@ -21,8 +21,9 @@ namespace TrivialPursuit.Models.GameBaseModels
         public int? GameVersionId { get; set; }
         public virtual GameVersion GameVersion { get; set; }
         public int? QuestionId { get; set; }
-        public virtual TrivialPursuit.Data.DataClasses.Question Question { get; set; }
+        public virtual TrivialPursuit.Data.DataClasses.Question Question { get; set; } = new Data.DataClasses.Question();
         public string Answer { get; set; }
+
 
     }
 }

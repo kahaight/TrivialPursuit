@@ -118,6 +118,29 @@ namespace TrivialPursuit.Services
             }
         }
 
+        public QuestionDetail GetQuestionByIdForGame(int? id)
+        {
+            var asvc = new AnswerService();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var adminEntity =
+                    ctx
+                        .Questions
+                        .Single(e => e.Id == id);
+                return
+                    new QuestionDetail
+                    {
+                        Id = adminEntity.Id,
+                        Text = adminEntity.Text,
+                        Category = adminEntity.Category,
+                        GameVersion = adminEntity.Version,
+                        Author = adminEntity.Author,
+                        IsUserGenerated = adminEntity.IsUserGenerated,
+                        Answers = adminEntity.Answers
+                    };
+            }
+        }
+
         public IEnumerable<QuestionDetail> GetQuestionsByCategory(string categoryName)
         {
             using (var ctx = new ApplicationDbContext())
@@ -172,7 +195,7 @@ namespace TrivialPursuit.Services
             }
         }
 
-        public List<QuestionDetail> GetQuestionsByVersionId(int id)
+        public List<QuestionDetail> GetQuestionsByVersionId(int? id)
         {
             var asvc = GetAnswerService();
             using (var ctx = new ApplicationDbContext())

@@ -269,6 +269,7 @@
     <Content Include="Views\GameVersion\Index.cshtml" />
     <Content Include="Views\GameBase\Index.cshtml" />
     <Content Include="Views\GameBase\Edit.cshtml" />
+    <Content Include="Views\GameBase\Win.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
