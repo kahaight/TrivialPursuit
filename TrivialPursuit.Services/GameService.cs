@@ -21,6 +21,7 @@ namespace TrivialPursuit.Services
                 GameVersion = vsvc.GetVersionNameById(id),
                 Questions = qsvc.GetQuestionsByVersionId(id),
             };
+            // set the static StaticGame = game
             return game;
         }
 
