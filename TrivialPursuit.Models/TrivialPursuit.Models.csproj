@@ -94,6 +94,7 @@
     <Compile Include="Question\QuestionEdit.cs" />
     <Compile Include="Question\QuestionListItem.cs" />
     <Compile Include="RoleListItem.cs" />
+    <Compile Include="UserModels\UserRankingModel.cs" />
     <Compile Include="Version\VersionCreate.cs" />
     <Compile Include="Version\VersionDetail.cs" />
     <Compile Include="Version\VersionEdit.cs" />

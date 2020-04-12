@@ -24,18 +24,11 @@ namespace TrivialPursuit.Services
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
                 if ((userManager.GetRoles(userId)).Contains("Admin"))
                 {
-
                     userIsAdmin = true;
                 }
             }
             return userIsAdmin;
-
         }
-
-        //public bool IncrementPoints(ApplicationUser player)
-        //{
-
-        //}
     }
 }
 
