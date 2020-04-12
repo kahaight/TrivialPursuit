@@ -36,7 +36,9 @@ namespace TrivialPursuit.Services
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Questions.Add(entity);
-                return ctx.SaveChanges() == 1;
+                int SaveChangesInt = ctx.SaveChanges();
+                bool returnBool = (SaveChangesInt == 1);
+                return returnBool;
             }
         }
         public IEnumerable<QuestionListItem> GetQuestions(Guid _userId)

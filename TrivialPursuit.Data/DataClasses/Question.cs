@@ -17,7 +17,7 @@ namespace TrivialPursuit.Data.DataClasses
         public string Text { get; set; }
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; } = new Category();
+        public virtual Category Category { get; set; }
         [ForeignKey(nameof(Version))]
         public int VersionId { get; set; }
         public virtual GameVersion Version { get; set; }

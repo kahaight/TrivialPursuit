@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrivialPursuit.Data.DataClasses;
-using TrivialPursuit.Models.Game;
 using TrivialPursuit.Models.GameBaseModels;
 using TrivialPursuitMVC.Data;
 
@@ -13,21 +12,6 @@ namespace TrivialPursuit.Services
     public class GameService
     {
 
-        public Game GetGame(int id)
-        {
-            var qsvc = new QuestionService();
-            var vsvc = new VersionService();
-            var context = new ApplicationDbContext();
-            Game game = new Game
-            {
-                GameVersion = vsvc.GetVersionNameById(id),
-                Questions = qsvc.GetQuestionsByVersionId(id),
-            };
-            // set the static StaticGame = game
-            return game;
-        }
-
-        //old stuff is above ^
         public GameEditModel GetGameById(string id)
         {
             using (var ctx = new ApplicationDbContext())

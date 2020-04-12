@@ -54,6 +54,7 @@ namespace TrivialPursuitMVC.Controllers
                 detail.QuestionId = question.Id;
                 detail.Question.Text = question.Text;
                 detail.Question.Answers = question.Answers;
+                detail.Question.Category = new Category();
                 detail.Question.Category.Color = question.Category.Color;
                 var repeatModel =
                     new GameEditModel
