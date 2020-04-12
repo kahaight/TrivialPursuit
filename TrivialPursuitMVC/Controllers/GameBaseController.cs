@@ -62,7 +62,8 @@ namespace TrivialPursuitMVC.Controllers
                         GameVersionId = detail.GameVersionId,
                         QuestionId = detail.QuestionId,
                         Question = detail.Question,
-                        CategoryColor = detail.Question.Category.Color
+                        CategoryColor = detail.Question.Category.Color,
+                        Answer = ""
 
                     };
                 return View(repeatModel);
@@ -83,27 +84,37 @@ namespace TrivialPursuitMVC.Controllers
                     return View(model);
                 }
 
-                    //successful here
-                    var qsvc = new QuestionService();
-                    var csvc = new CategoryService();
-                    var playerId = User.Identity.GetUserId();
-                    var player = ctx.Users.Single(e => e.Id == playerId);
-                    var game = ctx.GameBases.Single(e => e.PlayerId == playerId);
-                    var gsvc = new GameService();
-                    
+                //successful here
+                var qsvc = new QuestionService();
+                var csvc = new CategoryService();
+                var playerId = User.Identity.GetUserId();
+                var player = ctx.Users.Single(e => e.Id == playerId);
+                var game = ctx.GameBases.Single(e => e.PlayerId == playerId);
+                var gsvc = new GameService();
+
                 if (model.Answer != null)
                 {
+                    var boolean = true;
                     var question = qsvc.GetQuestionByIdForGame(model.QuestionId);
+                string correctAnswer = question.Answers.Single(e => e.IsCorrectSpelling == boolean).Text;
                     model.Question.IsUserGenerated = question.IsUserGenerated;
                     bool isCorrect = gsvc.CheckIfCorrect(model.Answer, question.Answers.ToList());
                     if (gsvc.UpdateGame(model))
                     {
-                        TempData["Test"] = "Test of emergency broadcast systems.";
+                        if (isCorrect)
+                        {
+                            TempData["Correct"] = "Correct.";
+                        }
+                        if (!isCorrect)
+                        {
+                            TempData["Incorrect"] = $"Incorrect. The correct answer was {correctAnswer}";
+                        }
                         gsvc.IncrementTally(player, model, ctx, isCorrect, game);
                         if (gsvc.CheckWinCondition(game))
                         {
                             return RedirectToAction("Win");
                         }
+
                         return RedirectToAction("Edit");
                     }
                 }
