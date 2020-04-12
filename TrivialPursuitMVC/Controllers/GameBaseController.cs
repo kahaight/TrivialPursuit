@@ -14,6 +14,8 @@ namespace TrivialPursuitMVC.Controllers
 {
     public class GameBaseController : Controller
     {
+        private static List<int> _usedQuestions = new List<int>();
+
         private Random _random = new Random();
         // GET: GameBase
         public ActionResult Index()
@@ -48,8 +50,16 @@ namespace TrivialPursuitMVC.Controllers
                 }
                 var qsvc = new QuestionService();
                 var questions = qsvc.GetQuestionsByVersionId(detail.GameVersionId);
+                QuestionDetail question = new QuestionDetail();
+                while(question.Text == null  || _usedQuestions.Contains(question.Id))
+                {
                 var index = _random.Next(0, questions.Count());
-                var question = questions[index];
+                question = questions[index];
+                    if(_usedQuestions.Count == questions.Count)
+                    {
+                        _usedQuestions = new List<int>();
+                    }
+                }
                 detail.QuestionId = question.Id;
                 detail.Question.Text = question.Text;
                 detail.Question.Answers = question.Answers;
@@ -69,6 +79,7 @@ namespace TrivialPursuitMVC.Controllers
 
 
                     };
+                _usedQuestions.Add(question.Id);
                 return View(repeatModel);
             }
         }
@@ -143,6 +154,7 @@ namespace TrivialPursuitMVC.Controllers
 
                 var gsvc = new GameService();
                 gsvc.ResetGame(game, ctx);
+                _usedQuestions = new List<int>();
                 TempData["Reset"] = "Reset.";
                 return View();
             }
