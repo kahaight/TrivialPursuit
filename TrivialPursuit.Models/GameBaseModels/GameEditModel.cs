@@ -25,6 +25,7 @@ namespace TrivialPursuit.Models.GameBaseModels
         public List<SelectListItem> Versions { get; set; }
         public string Answer { get; set; }
         public string CategoryColor { get; set; }
+        public string CategoryName { get; set; }
 
 
     }

@@ -12,26 +12,42 @@
     @if (!User.Identity.IsAuthenticated)
     {
 
-    <p><a href='@Url.Action("Register", "Account")' class="btn btn-primary">Register To Start Playing Now</a></p>
+        <p><a href='@Url.Action("Register", "Account")' class="btn btn-primary">Register To Start Playing Now</a></p>
     }
 </div>
 
 <div class="row">
+
     <div class="col-md-4">
+        <div class="piepiece">
+        </div>
         <h2>Make your own questions!</h2>
-        <p>Add your own questions that others will be able to enjoy, but only you will be able to edit!</p>
+        <p>Add your own questions!</p>
         <p><a href='@Url.Action("Index", "Question")' class="btn btn-primary">See My Questions</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Player Rankings</h2>
-        <p>Compare your trivia success to other players, rankings by category coming soon!</p>
-        <p> <a href='@Url.Action("Index", "User")' class="btn btn-primary">See Rankings</a></p>
-    </div>
-    <div class="col-md-4">
+        <div class="piepiece">
+        </div>
         <h2>Add Answers</h2>
         <p>
-            View the answers you've created and add new ones, multiple answers might allow for spelling errors when resonding!'
+            Add answers to your questions!'
         </p>
         <p><a href='@Url.Action("Index", "Answer")' class="btn btn-primary">See My Answers</a></p>
     </div>
+    <div class="col-md-4">
+        <div class="piepiece">
+        </div>
+        <h2>Player Rankings</h2>
+        <p>See where you rank!</p>
+        <p> <a href='@Url.Action("Index", "User")' class="btn btn-primary">See Rankings</a></p>
+    </div>
 </div>
+<style>
+    .piepiece {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 40px solid red;
+    }
+</style>

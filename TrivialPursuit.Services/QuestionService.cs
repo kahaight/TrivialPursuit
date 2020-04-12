@@ -58,7 +58,6 @@ namespace TrivialPursuit.Services
                                         Text = e.Text,
                                     }
                             );
-
                     return adminQuery.ToArray();
 
                 }
@@ -125,20 +124,20 @@ namespace TrivialPursuit.Services
             var asvc = new AnswerService();
             using (var ctx = new ApplicationDbContext())
             {
-                var adminEntity =
+                var entity =
                     ctx
                         .Questions
                         .Single(e => e.Id == id);
                 return
                     new QuestionDetail
                     {
-                        Id = adminEntity.Id,
-                        Text = adminEntity.Text,
-                        Category = adminEntity.Category,
-                        GameVersion = adminEntity.Version,
-                        Author = adminEntity.Author,
-                        IsUserGenerated = adminEntity.IsUserGenerated,
-                        Answers = adminEntity.Answers
+                        Id = entity.Id,
+                        Text = entity.Text,
+                        Category = entity.Category,
+                        GameVersion = entity.Version,
+                        Author = entity.Author,
+                        IsUserGenerated = entity.IsUserGenerated,
+                        Answers = entity.Answers
                     };
             }
         }

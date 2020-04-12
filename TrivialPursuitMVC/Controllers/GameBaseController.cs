@@ -23,8 +23,7 @@ namespace TrivialPursuitMVC.Controllers
             var model = gsvc.GetGameById(playerId);
             var ctx = new ApplicationDbContext();
             var entity = ctx.GameBases.Single(e => e.PlayerId == playerId);
-            entity.GameVersionId = null;
-            ctx.SaveChanges();
+            gsvc.ResetGame(entity, ctx);
             return View(model);
         }
         [HttpGet]
@@ -56,6 +55,7 @@ namespace TrivialPursuitMVC.Controllers
                 detail.Question.Answers = question.Answers;
                 detail.Question.Category = new Category();
                 detail.Question.Category.Color = question.Category.Color;
+                detail.Question.Category.Name = question.Category.Name;
                 var repeatModel =
                     new GameEditModel
                     {
@@ -64,7 +64,9 @@ namespace TrivialPursuitMVC.Controllers
                         QuestionId = detail.QuestionId,
                         Question = detail.Question,
                         CategoryColor = detail.Question.Category.Color,
-                        Answer = ""
+                        Answer = "",
+                        CategoryName = detail.Question.Category.Name
+
 
                     };
                 return View(repeatModel);
@@ -97,7 +99,7 @@ namespace TrivialPursuitMVC.Controllers
                 {
                     var boolean = true;
                     var question = qsvc.GetQuestionByIdForGame(model.QuestionId);
-                string correctAnswer = question.Answers.Single(e => e.IsCorrectSpelling == boolean).Text;
+                    string correctAnswer = question.Answers.Single(e => e.IsCorrectSpelling == boolean).Text;
                     model.Question.IsUserGenerated = question.IsUserGenerated;
                     bool isCorrect = gsvc.CheckIfCorrect(model.Answer, question.Answers.ToList());
                     if (gsvc.UpdateGame(model))
@@ -132,9 +134,18 @@ namespace TrivialPursuitMVC.Controllers
 
         public ActionResult Win()
         {
-            var gsvc = new GameService();
-            gsvc.ResetGame();
-            return View();
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var playerId = User.Identity.GetUserId();
+                var player = ctx.Users.Single(e => e.Id == playerId);
+                var game = ctx.GameBases.Single(e => e.PlayerId == playerId);
+
+                var gsvc = new GameService();
+                gsvc.ResetGame(game, ctx);
+                TempData["Reset"] = "Reset.";
+                return View();
+            }
         }
 
 

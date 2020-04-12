@@ -267,11 +267,11 @@
     <Content Include="Views\GameBase\Index.cshtml" />
     <Content Include="Views\GameBase\Edit.cshtml" />
     <Content Include="Views\GameBase\Win.cshtml" />
+    <Content Include="Views\Shared\_PiePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Game\" />
-    <Folder Include="Views\UnusedView\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

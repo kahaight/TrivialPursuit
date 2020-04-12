@@ -5,4 +5,8 @@
 }
 
 <h2>Win</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <p><a href='@Url.Action("Index", "GameBase")' class="btn btn-primary">Play Again</a></p>
+}
 

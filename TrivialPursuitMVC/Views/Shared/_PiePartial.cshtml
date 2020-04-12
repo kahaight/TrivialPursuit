@@ -1,0 +1,82 @@
+﻿
+<div class="scaler-container">
+    <div class="scaler">
+        <ul id="segments">
+            <li class="segment" style="-webkit-transform: rotate(0deg) skewY(-0deg); visibility: inherit;"></li>
+            <li class="segment" style="-webkit-transform: rotate(60deg) skewY(-0deg); visibility: inherit;"></li>
+            <li class="segment" style="-webkit-transform: rotate(120deg) skewY(-0deg); visibility: inherit;"></li>
+            <li class="segment" style="-webkit-transform: rotate(180deg) skewY(-0deg); visibility: inherit;"></li>
+            <li class="segment" style="-webkit-transform: rotate(240deg) skewY(-0deg); visibility: inherit;"></li>
+            @*<li class="segment" style="-webkit-transform: rotate(300deg) skewY(-0deg); visibility: inherit;"></li>*@
+
+        </ul>
+    </div>
+</div>
+
+<style>
+    .scaler-container {
+        background: black;
+        border-radius: 50%;
+        bottom: 26px;
+        box-shadow: 0 1px 2px gray, 0 2px 2px rgba(0, 0, 0, .2);
+        height: auto;
+        left: 26px;
+        pointer-events: none;
+        position: fixed;
+        width: auto;
+        background-color: black;
+    }
+
+    .scaler {
+        -webkit-transform: scale(0.25);
+        -webkit-transform-origin: 0 0;
+        float: left;
+        height: 50px;
+        margin: 8px;
+        width: 50px;
+    }
+
+    #segments {
+        border-radius: 50%;
+        height: 200px;
+        list-style: none;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 200px;
+    }
+
+    .segment {
+        -webkit-transform-origin: 0 100%;
+        background: rgb(227, 234, 249);
+        box-shadow: 0 0 0 6px rgb(29, 39, 57) inset;
+        height: 50%;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
+    }
+
+
+    #segments > :nth-child(1) {
+        background-color: blue;
+    }
+
+    #segments > :nth-child(2) {
+        background-color: deeppink;
+    }
+
+    #segments > :nth-child(3) {
+        background-color: yellow;
+    }
+
+    #segments > :nth-child(4) {
+        background-color: green;
+    }
+
+    #segments > :nth-child(5) {
+        background-color: black;
+    }
+</style>

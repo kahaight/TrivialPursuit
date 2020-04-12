@@ -146,8 +146,18 @@ namespace TrivialPursuit.Services
             return false;
         }
 
-        public void ResetGame()
+        public void ResetGame(GameBase gameBase, ApplicationDbContext ctx)
         {
+            gameBase.Answer = null;
+            gameBase.GameVersionId = null;
+            gameBase.Pie.HasBluePiece = false;
+            gameBase.Pie.HasBrownPiece = false;
+            gameBase.Pie.HasGreenPiece = false;
+            gameBase.Pie.HasOrangePiece = false;
+            gameBase.Pie.HasPinkPiece = false;
+            gameBase.Pie.HasYellowPiece = false;
+            ctx.SaveChanges();
+
 
         }
     }
