@@ -1,0 +1,18 @@
+﻿@using TrivialPursuit.Models.Question
+@model QuestionListItem
+
+
+<tr>
+    <td>
+        @Model.QuestionId
+    </td>
+    <td>
+        @Model.Text
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |
+        @Html.ActionLink("Details", "Details", new { id = Model.QuestionId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.QuestionId }) |
+        @Html.ActionLink("Add Answer", "AddAnswer", new { id = Model.QuestionId })
+    </td>
+</tr>

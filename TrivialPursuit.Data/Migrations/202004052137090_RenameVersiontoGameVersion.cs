@@ -1,0 +1,18 @@
+namespace TrivialPursuit.Data.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class RenameVersiontoGameVersion : DbMigration
+    {
+        public override void Up()
+        {
+            RenameTable(name: "dbo.Version", newName: "GameVersion");
+        }
+        
+        public override void Down()
+        {
+            RenameTable(name: "dbo.GameVersion", newName: "Version");
+        }
+    }
+}

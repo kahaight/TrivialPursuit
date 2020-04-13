@@ -54,7 +54,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClasses\Answer.cs" />
+    <Compile Include="DataClasses\Category.cs" />
+    <Compile Include="DataClasses\GameBase.cs" />
+    <Compile Include="DataClasses\Pie.cs" />
+    <Compile Include="DataClasses\Question.cs" />
+    <Compile Include="DataClasses\GameVersion.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\202004012347414_InitialCreate.cs" />
+    <Compile Include="Migrations\202004012347414_InitialCreate.Designer.cs">
+      <DependentUpon>202004012347414_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004020002452_Init.cs" />
+    <Compile Include="Migrations\202004020002452_Init.Designer.cs">
+      <DependentUpon>202004020002452_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004031531585_AppUserClassUpdate.cs" />
+    <Compile Include="Migrations\202004031531585_AppUserClassUpdate.Designer.cs">
+      <DependentUpon>202004031531585_AppUserClassUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004040338037_RetoolQuestions.cs" />
+    <Compile Include="Migrations\202004040338037_RetoolQuestions.Designer.cs">
+      <DependentUpon>202004040338037_RetoolQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004040347331_AddYearToVersion.cs" />
+    <Compile Include="Migrations\202004040347331_AddYearToVersion.Designer.cs">
+      <DependentUpon>202004040347331_AddYearToVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004040401274_DeNull.cs" />
+    <Compile Include="Migrations\202004040401274_DeNull.Designer.cs">
+      <DependentUpon>202004040401274_DeNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004041738389_AddTextToAnswer.cs" />
+    <Compile Include="Migrations\202004041738389_AddTextToAnswer.Designer.cs">
+      <DependentUpon>202004041738389_AddTextToAnswer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004051827446_AddAuthorToAnswer.cs" />
+    <Compile Include="Migrations\202004051827446_AddAuthorToAnswer.Designer.cs">
+      <DependentUpon>202004051827446_AddAuthorToAnswer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004052137090_RenameVersiontoGameVersion.cs" />
+    <Compile Include="Migrations\202004052137090_RenameVersiontoGameVersion.Designer.cs">
+      <DependentUpon>202004052137090_RenameVersiontoGameVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004110516418_AddedGameBase.cs" />
+    <Compile Include="Migrations\202004110516418_AddedGameBase.Designer.cs">
+      <DependentUpon>202004110516418_AddedGameBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +109,36 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataClasses\" />
+    <EmbeddedResource Include="Migrations\202004012347414_InitialCreate.resx">
+      <DependentUpon>202004012347414_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004020002452_Init.resx">
+      <DependentUpon>202004020002452_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031531585_AppUserClassUpdate.resx">
+      <DependentUpon>202004031531585_AppUserClassUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004040338037_RetoolQuestions.resx">
+      <DependentUpon>202004040338037_RetoolQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004040347331_AddYearToVersion.resx">
+      <DependentUpon>202004040347331_AddYearToVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004040401274_DeNull.resx">
+      <DependentUpon>202004040401274_DeNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004041738389_AddTextToAnswer.resx">
+      <DependentUpon>202004041738389_AddTextToAnswer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051827446_AddAuthorToAnswer.resx">
+      <DependentUpon>202004051827446_AddAuthorToAnswer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004052137090_RenameVersiontoGameVersion.resx">
+      <DependentUpon>202004052137090_RenameVersiontoGameVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004110516418_AddedGameBase.resx">
+      <DependentUpon>202004110516418_AddedGameBase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

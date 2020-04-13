@@ -1,0 +1,40 @@
+﻿@model TrivialPursuit.Models.GameBaseModels.GameEditModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Welcome!</h2>
+
+@*<div>
+        <h4>Click the button to select the version of Trivial Pursuit that you wish to play</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PlayerId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GameBaseId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GameBaseId)
+            </dd>
+
+        </dl>
+    </div>*@
+<p>
+    <a href='@Url.Action("Edit", "GameBase", new { id = Model.GameBaseId })' class="btn btn-primary">Select Version</a>
+
+</p>
+<div>
+
+@Html.Partial("_PiePartial")
+</div>
+<style>
+</style>
