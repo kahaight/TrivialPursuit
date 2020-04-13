@@ -7,47 +7,75 @@
     <p class="lead">Play a round of trivial pursuit to beef up your trivia knowledge. Don't look like a fool at your local bar's trivia night ever again.</p>
     @if (User.Identity.IsAuthenticated)
     {
-        <p><a href='@Url.Action("Index", "GameBase")' class="btn btn-primary">Start Playing Now</a></p>
+        <h2 style="font-size: 60px;"><a href='@Url.Action("Index", "GameBase")' class="btn" id="aone"></a>Play Now</h2>
     }
     @if (!User.Identity.IsAuthenticated)
     {
 
-        <p><a href='@Url.Action("Register", "Account")' class="btn btn-primary">Register To Start Playing Now</a></p>
+        <h2 style="font-size: 60px;"><a href='@Url.Action("Register", "Account")' class="btn" id="aone"></a>Register</h2>
     }
 </div>
 
 <div class="row">
 
     <div class="col-md-4">
-        <div class="piepiece">
-        </div>
-        <h2>Make your own questions!</h2>
-        <p>Add your own questions!</p>
-        <p><a href='@Url.Action("Index", "Question")' class="btn btn-primary">See My Questions</a></p>
+        <h2>My Questions!</h2>
+        <a href='@Url.Action("Index", "Question")' class="btn" id="atwo"></a>
     </div>
     <div class="col-md-4">
-        <div class="piepiece">
-        </div>
-        <h2>Add Answers</h2>
-        <p>
-            Add answers to your questions!'
-        </p>
-        <p><a href='@Url.Action("Index", "Answer")' class="btn btn-primary">See My Answers</a></p>
+        <h2>My Answers</h2>
+        <a href='@Url.Action("Index", "Answer")' class="btn" id="athree"></a>
     </div>
     <div class="col-md-4">
-        <div class="piepiece">
-        </div>
-        <h2>Player Rankings</h2>
-        <p>See where you rank!</p>
-        <p> <a href='@Url.Action("Index", "User")' class="btn btn-primary">See Rankings</a></p>
+        <h2>
+            Rankings
+        </h2>
+        <a href='@Url.Action("Index", "User")' class="btn" id="afour"></a>
     </div>
 </div>
 <style>
-    .piepiece {
+    .btn {
         width: 0;
         height: 0;
-        border-left: 20px solid transparent;
-        border-right: 20px solid transparent;
-        border-top: 40px solid red;
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-top: 200px solid;
+        padding: 0;
+        border-radius: 50%;
     }
+
+    #aone {
+        color: rebeccapurple;
+    }
+
+        #aone:hover {
+            color: yellow;
+        }
+
+    #atwo {
+        color: blue;
+    }
+
+    #atwo:hover {
+        color: yellow;
+    }
+
+    #athree {
+        color: deeppink;
+    }
+
+        #athree:hover {
+            color: yellow;
+        }
+
+    #afour {
+        color: green;
+    }
+
+        #afour:hover {
+            color: yellow;
+        }
+        .col-md-4{
+            text-align: center;
+        }
 </style>
