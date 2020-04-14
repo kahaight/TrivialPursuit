@@ -62,6 +62,7 @@ namespace TrivialPursuit.Services
         {
             if (!gameModel.Question.IsUserGenerated)
             {
+
                 switch (gameModel.CategoryColor)
                 {
                     case "Blue":
@@ -155,7 +156,19 @@ namespace TrivialPursuit.Services
 
         public bool CheckWinCondition(GameBase gameBase)
         {
-            if (gameBase.Pie.HasBluePiece && gameBase.Pie.HasPinkPiece && gameBase.Pie.HasYellowPiece && gameBase.Pie.HasBrownPiece && gameBase.Pie.HasGreenPiece && gameBase.Pie.HasOrangePiece)
+            if (gameBase.PlayerOnePie.HasBluePiece && gameBase.PlayerOnePie.HasPinkPiece && gameBase.PlayerOnePie.HasYellowPiece && gameBase.PlayerOnePie.HasBrownPiece && gameBase.PlayerOnePie.HasGreenPiece && gameBase.PlayerOnePie.HasOrangePiece)
+            {
+                return true;
+            }
+            if (gameBase.PlayerTwoPie.HasBluePiece && gameBase.PlayerTwoPie.HasPinkPiece && gameBase.PlayerTwoPie.HasYellowPiece && gameBase.PlayerTwoPie.HasBrownPiece && gameBase.PlayerTwoPie.HasGreenPiece && gameBase.PlayerTwoPie.HasOrangePiece)
+            {
+                return true;
+            }
+            if (gameBase.PlayerThreePie.HasBluePiece && gameBase.PlayerThreePie.HasPinkPiece && gameBase.PlayerThreePie.HasYellowPiece && gameBase.PlayerThreePie.HasBrownPiece && gameBase.PlayerThreePie.HasGreenPiece && gameBase.PlayerThreePie.HasOrangePiece)
+            {
+                return true;
+            }
+            if (gameBase.PlayerFourPie.HasBluePiece && gameBase.PlayerFourPie.HasPinkPiece && gameBase.PlayerFourPie.HasYellowPiece && gameBase.PlayerFourPie.HasBrownPiece && gameBase.PlayerFourPie.HasGreenPiece && gameBase.PlayerFourPie.HasOrangePiece)
             {
                 return true;
             }
@@ -164,14 +177,33 @@ namespace TrivialPursuit.Services
 
         public void ResetGame(GameBase gameBase, ApplicationDbContext ctx)
         {
+            gameBase.QuestionId = null;
             gameBase.Answer = null;
             gameBase.GameVersionId = null;
-            gameBase.Pie.HasBluePiece = false;
-            gameBase.Pie.HasBrownPiece = false;
-            gameBase.Pie.HasGreenPiece = false;
-            gameBase.Pie.HasOrangePiece = false;
-            gameBase.Pie.HasPinkPiece = false;
-            gameBase.Pie.HasYellowPiece = false;
+            gameBase.PlayerOnePie.HasBluePiece = false;
+            gameBase.PlayerOnePie.HasBrownPiece = false;
+            gameBase.PlayerOnePie.HasGreenPiece = false;
+            gameBase.PlayerOnePie.HasOrangePiece = false;
+            gameBase.PlayerOnePie.HasPinkPiece = false;
+            gameBase.PlayerOnePie.HasYellowPiece = false;
+            gameBase.PlayerTwoPie.HasBluePiece = false;
+            gameBase.PlayerTwoPie.HasBrownPiece = false;
+            gameBase.PlayerTwoPie.HasGreenPiece = false;
+            gameBase.PlayerTwoPie.HasOrangePiece = false;
+            gameBase.PlayerTwoPie.HasPinkPiece = false;
+            gameBase.PlayerTwoPie.HasYellowPiece = false;
+            gameBase.PlayerThreePie.HasBluePiece = false;
+            gameBase.PlayerThreePie.HasBrownPiece = false;
+            gameBase.PlayerThreePie.HasGreenPiece = false;
+            gameBase.PlayerThreePie.HasOrangePiece = false;
+            gameBase.PlayerThreePie.HasPinkPiece = false;
+            gameBase.PlayerThreePie.HasYellowPiece = false;
+            gameBase.PlayerFourPie.HasBluePiece = false;
+            gameBase.PlayerFourPie.HasBrownPiece = false;
+            gameBase.PlayerFourPie.HasGreenPiece = false;
+            gameBase.PlayerFourPie.HasOrangePiece = false;
+            gameBase.PlayerFourPie.HasPinkPiece = false;
+            gameBase.PlayerFourPie.HasYellowPiece = false;
             ctx.SaveChanges();
 
 
