@@ -28,29 +28,29 @@ namespace TrivialPursuitMVC.Data
             }
         }
         [DefaultValue(0)]
-        public int? BlueCorrect { get; set; }
+        public int BlueCorrect { get; set; }
         [DefaultValue(0)]
-        public int? PinkCorrect { get; set; }
+        public int PinkCorrect { get; set; }
         [DefaultValue(0)]
-        public int? YellowCorrect { get; set; }
+        public int YellowCorrect { get; set; }
         [DefaultValue(0)]
-        public int? BrownCorrect { get; set; }
+        public int BrownCorrect { get; set; }
         [DefaultValue(0)]
-        public int? GreenCorrect {get; set; }
+        public int GreenCorrect {get; set; }
         [DefaultValue(0)]
-        public int? OrangeCorrect { get; set; }
+        public int OrangeCorrect { get; set; }
         [DefaultValue(0)]
-        public int? BlueAnswered { get; set; }
+        public int BlueAnswered { get; set; }
         [DefaultValue(0)]
-        public int? PinkAnswered { get; set; }
+        public int PinkAnswered { get; set; }
         [DefaultValue(0)]
-        public int? YellowAnswered { get; set; }
+        public int YellowAnswered { get; set; }
         [DefaultValue(0)]
-        public int? BrownAnswered { get; set; }
+        public int BrownAnswered { get; set; }
         [DefaultValue(0)]
-        public int? GreenAnswered { get; set; }
+        public int GreenAnswered { get; set; }
         [DefaultValue(0)]
-        public int? OrangeAnswered { get; set; }
+        public int OrangeAnswered { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

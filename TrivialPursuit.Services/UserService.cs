@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrivialPursuit.Models;
+using TrivialPursuit.Models.UserModels;
 using TrivialPursuitMVC.Data;
 
 namespace TrivialPursuit.Services
@@ -28,6 +29,32 @@ namespace TrivialPursuit.Services
                 }
             }
             return userIsAdmin;
+        }
+
+        public IQueryable<UserRankingModel> GetUserRankings()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx.Users.Select(e=>
+                    new UserRankingModel
+                    {
+                        BlueAnswered = e.BlueAnswered,
+                        BlueCorrect = e.BlueCorrect,
+                        PinkAnswered = e.PinkAnswered,
+                        PinkCorrect = e.PinkCorrect,
+                        YellowAnswered = e.YellowAnswered,
+                        YellowCorrect = e.YellowCorrect,
+                        BrownAnswered = e.BrownAnswered,
+                        BrownCorrect = e.BrownCorrect,
+                        GreenAnswered = e.GreenAnswered,
+                        GreenCorrect = e.GreenCorrect,
+                        OrangeAnswered = e.OrangeAnswered,
+                        OrangeCorrect = e.OrangeCorrect
+                    }
+                    );
+
+                return query;
+            }
         }
     }
 }
