@@ -13,31 +13,32 @@ namespace TrivialPursuit.Services
 {
     public class UserService
     {
+        private ApplicationDbContext _context;
         public UserService() { }
 
         public bool ConfirmUserIsAdmin(string userId)
         {
             bool userIsAdmin = false;
-            using (var ctx = new ApplicationDbContext())
-            {
-                var user = ctx.Users.Single(e => e.Id == userId);
+
+                _context = new ApplicationDbContext();
+                var user = _context.Users.Single(e => e.Id == userId);
                 var identityUserRoles = user.Roles.ToList();
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
                 if ((userManager.GetRoles(userId)).Contains("Admin"))
                 {
                     userIsAdmin = true;
                 }
-            }
+
             return userIsAdmin;
         }
 
         public IQueryable<UserRankingModel> GetUserRankings()
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query = ctx.Users.Select(e=>
+            _context = new ApplicationDbContext();
+                var query = _context.Users.Select(e=>
                     new UserRankingModel
                     {
+                        PlayerName = e.DisplayName,
                         BlueAnswered = e.BlueAnswered,
                         BlueCorrect = e.BlueCorrect,
                         PinkAnswered = e.PinkAnswered,
@@ -54,7 +55,7 @@ namespace TrivialPursuit.Services
                     );
 
                 return query;
-            }
+            
         }
     }
 }

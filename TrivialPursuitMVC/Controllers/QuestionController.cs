@@ -15,9 +15,7 @@ namespace TrivialPursuitMVC.Controllers
     [Authorize]
     public class QuestionController : Controller
     {
-        private ApplicationDbContext _context = new ApplicationDbContext();
-        private VersionService _versionService = new VersionService();
-        private CategoryService _categoryService = new CategoryService();
+        private ApplicationDbContext _context;
         // GET: Question
         public ActionResult Index()
         {
@@ -28,6 +26,7 @@ namespace TrivialPursuitMVC.Controllers
         //GET
         public ActionResult Create()
         {
+            _context = new ApplicationDbContext();
             ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
             ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             return View();
@@ -38,7 +37,7 @@ namespace TrivialPursuitMVC.Controllers
         public ActionResult Create(QuestionCreate model)
         {
             if (!ModelState.IsValid) return View(model);
-
+            _context = new ApplicationDbContext();
             ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
             ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             var service = CreateQuestionService();
@@ -53,6 +52,7 @@ namespace TrivialPursuitMVC.Controllers
 
         public ActionResult Details(int id)
         {
+            _context = new ApplicationDbContext();
             var svc = CreateQuestionService();
             var model = svc.GetQuestionById(id);
             ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
@@ -61,6 +61,7 @@ namespace TrivialPursuitMVC.Controllers
         }
         public ActionResult Edit(int id)
         {
+            _context = new ApplicationDbContext();
             ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
             ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             var service = CreateQuestionService();
@@ -80,6 +81,7 @@ namespace TrivialPursuitMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, QuestionEdit model)
         {
+            _context = new ApplicationDbContext();
             ViewBag.CategoryName = new SelectList(_context.Categories.ToList(), "Name", "Name");
             ViewBag.VersionName = new SelectList(_context.Versions.ToList(), "Name", "Name");
             if (!ModelState.IsValid) return View(model);

@@ -1,17 +1,66 @@
-﻿
+﻿@model IEnumerable<TrivialPursuit.Models.UserModels.UserRankingModel>
+
 @{
     ViewBag.Title = "Index";
 }
 
-@if (ViewBag.displayMenu == "Yes")
-{
-    <h1>Welcome Admin. Now you can create user Role.</h1>
-    <h3>
-        <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
-    </h3>
+<h2>Index</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BluePercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PinkPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YellowPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrownPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GreenPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrangePercentage)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BluePercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PinkPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YellowPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BrownPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GreenPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrangePercentage)
+        </td>
+    </tr>
 }
-else
-{
-    <h2>  Welcome <strong>@ViewBag.Name</strong> :) .We will add user module soon </h2>
-}  
+
+</table>

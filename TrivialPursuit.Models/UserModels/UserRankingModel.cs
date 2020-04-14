@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace TrivialPursuit.Models.UserModels
 {
     public class UserRankingModel
     {
+        [DisplayName("Player:")]
+        public string PlayerName { get; set; }
         public int BlueAnswered { get; set; }
         public int BlueCorrect { get; set; }
         public int PinkAnswered { get; set; }
@@ -33,6 +36,7 @@ namespace TrivialPursuit.Models.UserModels
                 return BlueCorrect + PinkCorrect + YellowCorrect + BrownCorrect + GreenCorrect + OrangeCorrect;
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double TotalPercentage
         {
             get
@@ -44,6 +48,7 @@ namespace TrivialPursuit.Models.UserModels
                 return Convert.ToDouble(TotalCorrect) / Convert.ToDouble(TotalAnswered);
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double BluePercentage
         {
             get
@@ -55,6 +60,7 @@ namespace TrivialPursuit.Models.UserModels
                 return Convert.ToDouble(BlueCorrect) / Convert.ToDouble(BlueAnswered);
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double PinkPercentage
         {
             get
@@ -66,6 +72,7 @@ namespace TrivialPursuit.Models.UserModels
                 return Convert.ToDouble(PinkCorrect) / Convert.ToDouble(PinkAnswered);
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double YellowPercentage
         {
             get
@@ -77,6 +84,7 @@ namespace TrivialPursuit.Models.UserModels
                 return Convert.ToDouble(YellowCorrect) / Convert.ToDouble(YellowAnswered);
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double BrownPercentage
         {
             get
@@ -88,6 +96,7 @@ namespace TrivialPursuit.Models.UserModels
                 return Convert.ToDouble(BrownCorrect) / Convert.ToDouble(BrownAnswered);
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double GreenPercentage
         {
             get
@@ -99,6 +108,7 @@ namespace TrivialPursuit.Models.UserModels
                 return Convert.ToDouble(GreenCorrect) / Convert.ToDouble(GreenAnswered);
             }
         }
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double OrangePercentage
         {
             get
