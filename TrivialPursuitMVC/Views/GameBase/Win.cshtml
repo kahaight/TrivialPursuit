@@ -1,10 +1,10 @@
-﻿@model TrivialPursuit.Models.GameBaseModels.GameMenuModel
+﻿@model TrivialPursuit.Models.GameBaseModels.GameEditModel
 
 @{
     ViewBag.Title = "Win";
 }
 
-<h2>Win</h2>
+<h2>You Win!</h2>
 @if (User.Identity.IsAuthenticated)
 {
     <p><a href='@Url.Action("Index", "GameBase")' class="btn btn-primary">Play Again</a></p>

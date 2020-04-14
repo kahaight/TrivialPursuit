@@ -101,6 +101,10 @@
     <Compile Include="Migrations\202004110516418_AddedGameBase.Designer.cs">
       <DependentUpon>202004110516418_AddedGameBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004140311032_PlayerAnswersNotNullable.cs" />
+    <Compile Include="Migrations\202004140311032_PlayerAnswersNotNullable.Designer.cs">
+      <DependentUpon>202004140311032_PlayerAnswersNotNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -138,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004110516418_AddedGameBase.resx">
       <DependentUpon>202004110516418_AddedGameBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004140311032_PlayerAnswersNotNullable.resx">
+      <DependentUpon>202004140311032_PlayerAnswersNotNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
