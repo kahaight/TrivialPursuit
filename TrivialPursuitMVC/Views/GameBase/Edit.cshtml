@@ -7,85 +7,402 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <br/>
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.GameBaseId)
-        @Html.HiddenFor(model => model.QuestionId)
+    <br />
 
-        <div>@Html.Partial("_PiePartial")</div>
-        @if (TempData.ContainsKey("Correct"))
-        {
-            <div class="alert alert-success fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert">
-                    <span>&times;</span>
-                </button>
-                @TempData["Correct"]
-            </div>
-        }
-        @if (TempData.ContainsKey("Incorrect"))
-        {
-            <div class="alert alert-success fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert">
-                    <span>&times;</span>
-                </button>
-                @TempData["Incorrect"]
-            </div>
-        }
-        @if (Model.GameVersionId == null)
-        {
+    <div class="col-12 col-md-8">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.GameBaseId)
+            @Html.HiddenFor(model => model.QuestionId)
+
+            <div>@Html.Partial("_PiePartial")</div>
+            @if (TempData.ContainsKey("Correct"))
+            {
+                <div class="alert alert-success fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                    @TempData["Correct"]
+                </div>
+            }
+            @if (TempData.ContainsKey("Incorrect"))
+            {
+                <div class="alert alert-success fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                    @TempData["Incorrect"]
+                </div>
+            }
+            @if (Model.GameVersionId == null)
+            {
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GameVersion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("GameVersion", (SelectList)ViewBag.VersionName, " ")
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NumberOfPlayers, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NumberOfPlayers, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NumberOfPlayers, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+
+            @if (Model.GameVersionId != null)
+            {
+                <h2>Turn: Player @Model.PlayerTurn</h2>
+                @Html.HiddenFor(model => model.GameVersionId)
+                @Html.HiddenFor(model => model.CategoryColor)
+                @Html.HiddenFor(model => model.NumberOfPlayers)
+                @Html.HiddenFor(model => model.PlayerTurn)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Question.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @(Model.Question.Category.Name)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Question, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @(Model.Question.Text)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
 
             <div class="form-group">
-                @Html.LabelFor(model => model.GameVersion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("GameVersion", (SelectList)ViewBag.VersionName, " ")
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.NumberOfPlayers, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NumberOfPlayers, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NumberOfPlayers, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        }
-
-        @if (Model.GameVersionId != null)
-        {
-            <h2>Turn: Player @Model.PlayerTurn</h2>
-            @Html.HiddenFor(model => model.GameVersionId)
-            @Html.HiddenFor(model => model.CategoryColor)
-            @Html.HiddenFor(model => model.NumberOfPlayers)
-            @Html.HiddenFor(model=> model.PlayerTurn)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Question.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @(Model.Question.Category.Name)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Question, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @(Model.Question.Text)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        }
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </div>
     </div>
+}
+@if (Model.GameVersionId != null)
+{
+    <div class="col-6 col-md-4">
+
+        <table class="table">
+
+            <tr>
+                <td>
+                    Player1
+                </td>
+                <td>
+                    <div id="PlayerOneBlue"></div>
+                </td>
+                <td>
+                    <div id="PlayerOnePink"></div>
+                </td>
+                <td>
+                    <div id="PlayerOneYellow"></div>
+                </td>
+                <td>
+                    <div id="PlayerOneBrown"></div>
+                </td>
+                <td>
+                    <div id="PlayerOneGreen"></div>
+                </td>
+                <td>
+                    <div id="PlayerOneOrange"></div>
+                </td>
+            </tr>
+            @if (Model.NumberOfPlayers >= 2)
+            {
+                <tr>
+                    <td>
+                        Player2
+                    </td>
+                    <td>
+                        <div id="PlayerTwoBlue"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerTwoPink"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerTwoYellow"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerTwoBrown"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerTwoGreen"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerTwoOrange"></div>
+                    </td>
+                </tr>
+            }
+            @if (Model.NumberOfPlayers >= 3)
+            {
+                <tr>
+                    <td>
+                        Player3
+                    </td>
+                    <td>
+                        <div id="PlayerThreeBlue"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerThreePink"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerThreeYellow"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerThreeBrown"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerThreeGreen"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerThreeOrange"></div>
+                    </td>
+                </tr>
+            }
+            @if (Model.NumberOfPlayers >= 4)
+            {
+                <tr>
+                    <td>
+                        Player4
+                    </td>
+                    <td>
+                        <div id="PlayerFourBlue"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerFourPink"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerFourYellow"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerFourBrown"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerFourGreen"></div>
+                    </td>
+                    <td>
+                        <div id="PlayerFourOrange"></div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <style>
+        td div {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid white;
+            padding: 0;
+            border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
+    if (Model.PlayerOnePie.HasBluePiece)
+    {
+        <style>
+            #PlayerOneBlue {
+                border-top: 20px solid blue;
+            }
+        </style>
+    }
+    if (Model.PlayerOnePie.HasPinkPiece)
+    {
+        <style>
+            #PlayerOnePink {
+                border-top: 20px solid deeppink;
+            }
+        </style>
+    }
+    if (Model.PlayerOnePie.HasYellowPiece)
+    {
+        <style>
+            #PlayerOneYellow {
+                border-top: 20px solid yellow;
+            }
+        </style>
+    }
+    if (Model.PlayerOnePie.HasBrownPiece)
+    {
+        <style>
+            #PlayerOneBrown {
+                border-top: 20px solid brown;
+            }
+        </style>
+    }
+    if (Model.PlayerOnePie.HasGreenPiece)
+    {
+        <style>
+            #PlayerOneGreen {
+                border-top: 20px solid green;
+            }
+        </style>
+    }
+    if (Model.PlayerOnePie.HasOrangePiece)
+    {
+        <style>
+            #PlayerOneOrange {
+                border-top: 20px solid orange;
+            }
+        </style>
+    }
+    if (Model.PlayerTwoPie.HasBluePiece)
+    {
+        <style>
+            #PlayerTwoBlue {
+                border-top: 20px solid blue;
+            }
+        </style>
+    }
+    if (Model.PlayerTwoPie.HasPinkPiece)
+    {
+        <style>
+            #PlayerTwoPink {
+                border-top: 20px solid deeppink;
+            }
+        </style>
+    }
+    if (Model.PlayerTwoPie.HasYellowPiece)
+    {
+        <style>
+            #PlayerTwoYellow {
+                border-top: 20px solid yellow;
+            }
+        </style>
+    }
+    if (Model.PlayerTwoPie.HasBrownPiece)
+    {
+        <style>
+            #PlayerTwoBrown {
+                border-top: 20px solid brown;
+            }
+        </style>
+    }
+    if (Model.PlayerTwoPie.HasGreenPiece)
+    {
+        <style>
+            #PlayerTwoGreen {
+                border-top: 20px solid green;
+            }
+        </style>
+    }
+    if (Model.PlayerTwoPie.HasOrangePiece)
+    {
+        <style>
+            #PlayerTwoOrange {
+                border-top: 20px solid orange;
+            }
+        </style>
+    }
+    if (Model.PlayerThreePie.HasBluePiece)
+    {
+        <style>
+            #PlayerThreeBlue {
+                border-top: 20px solid blue;
+            }
+        </style>
+    }
+    if (Model.PlayerThreePie.HasPinkPiece)
+    {
+        <style>
+            #PlayerThreePink {
+                border-top: 20px solid deeppink;
+            }
+        </style>
+    }
+    if (Model.PlayerThreePie.HasYellowPiece)
+    {
+        <style>
+            #PlayerThreeYellow {
+                border-top: 20px solid yellow;
+            }
+        </style>
+    }
+    if (Model.PlayerThreePie.HasBrownPiece)
+    {
+        <style>
+            #PlayerThreeBrown {
+                border-top: 20px solid brown;
+            }
+        </style>
+    }
+    if (Model.PlayerThreePie.HasGreenPiece)
+    {
+        <style>
+            #PlayerThreeGreen {
+                border-top: 20px solid green;
+            }
+        </style>
+    }
+    if (Model.PlayerThreePie.HasOrangePiece)
+    {
+        <style>
+            #PlayerThreeOrange {
+                border-top: 20px solid orange;
+            }
+        </style>
+    }
+    if (Model.PlayerFourPie.HasBluePiece)
+    {
+        <style>
+            #PlayerFourBlue {
+                border-top: 20px solid blue;
+            }
+        </style>
+    }
+    if (Model.PlayerFourPie.HasPinkPiece)
+    {
+        <style>
+            #PlayerFourPink {
+                border-top: 20px solid deeppink;
+            }
+        </style>
+    }
+    if (Model.PlayerFourPie.HasYellowPiece)
+    {
+        <style>
+            #PlayerFourYellow {
+                border-top: 20px solid yellow;
+            }
+        </style>
+    }
+    if (Model.PlayerFourPie.HasBrownPiece)
+    {
+        <style>
+            #PlayerFourBrown {
+                border-top: 20px solid brown;
+            }
+        </style>
+    }
+    if (Model.PlayerFourPie.HasGreenPiece)
+    {
+        <style>
+            #PlayerFourGreen {
+                border-top: 20px solid green;
+            }
+        </style>
+    }
+    if (Model.PlayerFourPie.HasOrangePiece)
+    {
+        <style>
+            #PlayerFourOrange {
+                border-top: 20px solid orange;
+            }
+        </style>
+    }
 }
 
 @section Scripts {

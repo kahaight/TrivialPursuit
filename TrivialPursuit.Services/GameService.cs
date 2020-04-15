@@ -16,6 +16,7 @@ namespace TrivialPursuit.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                //add exception handler here
                 var entity = ctx.GameBases
                     .Single(e => e.PlayerId == id);
                 return new GameEditModel
@@ -24,8 +25,11 @@ namespace TrivialPursuit.Services
                     GameBaseId = entity.PlayerId,
                     GameVersionId = entity.GameVersionId,
                     PlayerTurn = entity.PlayerTurn,
-                    NumberOfPlayers = entity.NumberOfPlayers
-
+                    NumberOfPlayers = entity.NumberOfPlayers,
+                    PlayerOnePie = entity.PlayerOnePie,
+                    PlayerTwoPie = entity.PlayerTwoPie,
+                    PlayerThreePie = entity.PlayerThreePie,
+                    PlayerFourPie = entity.PlayerFourPie
                 };
             }
         }

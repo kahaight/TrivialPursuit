@@ -79,7 +79,11 @@ namespace TrivialPursuitMVC.Controllers
                         Answer = "",
                         CategoryName = detail.Question.Category.Name,
                         NumberOfPlayers = detail.NumberOfPlayers,
-                        PlayerTurn = detail.PlayerTurn
+                        PlayerTurn = detail.PlayerTurn,
+                                            PlayerOnePie = detail.PlayerOnePie,
+                        PlayerTwoPie = detail.PlayerTwoPie,
+                        PlayerThreePie = detail.PlayerThreePie,
+                        PlayerFourPie = detail.PlayerFourPie
                     };
                 _usedQuestions.Add(question.Id);
                 return View(repeatModel);
