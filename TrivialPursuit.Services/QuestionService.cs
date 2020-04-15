@@ -56,6 +56,8 @@ namespace TrivialPursuit.Services
                                     {
                                         QuestionId = e.Id,
                                         Text = e.Text,
+                                        Category = e.Category,
+                                        GameVersion = e.Version
                                     }
                             );
                     return adminQuery.ToArray();

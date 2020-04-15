@@ -10,6 +10,9 @@
         @Model.Text
     </td>
     <td>
+    @Model.Category.Name
+    </td>
+    <td>
         @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |
         @Html.ActionLink("Details", "Details", new { id = Model.QuestionId }) |
         @Html.ActionLink("Delete", "Delete", new { id = Model.QuestionId }) |
