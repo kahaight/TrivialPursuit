@@ -4,13 +4,13 @@
 
 <tr>
     <td>
-        @Model.QuestionId
-    </td>
-    <td>
         @Model.Text
     </td>
     <td>
-    @Model.Category.Name
+        @Model.Category.Name
+    </td>
+    <td>
+        @Model.GameVersion.Name
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |

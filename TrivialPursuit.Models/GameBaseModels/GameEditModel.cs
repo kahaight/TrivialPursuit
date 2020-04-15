@@ -14,6 +14,7 @@ namespace TrivialPursuit.Models.GameBaseModels
     public class GameEditModel
     {
         public string PlayerId { get; set; }
+        public string DisplayName { get; set; }
         public string GameBaseId { get; set; }
         public string GameVersion { get; set; }
         [ForeignKey(nameof(Question))]

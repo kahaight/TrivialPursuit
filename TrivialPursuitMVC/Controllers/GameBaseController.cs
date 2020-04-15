@@ -80,10 +80,11 @@ namespace TrivialPursuitMVC.Controllers
                         CategoryName = detail.Question.Category.Name,
                         NumberOfPlayers = detail.NumberOfPlayers,
                         PlayerTurn = detail.PlayerTurn,
-                                            PlayerOnePie = detail.PlayerOnePie,
+                        PlayerOnePie = detail.PlayerOnePie,
                         PlayerTwoPie = detail.PlayerTwoPie,
                         PlayerThreePie = detail.PlayerThreePie,
-                        PlayerFourPie = detail.PlayerFourPie
+                        PlayerFourPie = detail.PlayerFourPie,
+                        DisplayName = detail.DisplayName
                     };
                 _usedQuestions.Add(question.Id);
                 return View(repeatModel);
@@ -144,7 +145,14 @@ namespace TrivialPursuitMVC.Controllers
                     if (!isCorrect)
                     {
                         model.PlayerTurn = gsvc.UpdatePlayerTurn(model);
-                        TempData["Incorrect"] = $"Incorrect. The correct answer was {correctAnswer}. Turn goes to player {model.PlayerTurn}";
+                        if (model.PlayerTurn == 1)
+                        {
+                            TempData["Incorrect"] = $"Incorrect. The correct answer was {correctAnswer}. Turn goes to player {model.PlayerTurn}";
+                        }
+                        else
+                        {
+                            TempData["Incorrect"] = $"Incorrect. The correct answer was {correctAnswer}. Turn goes to {model.DisplayName}";
+                        }
                     }
                 }
                 if (gsvc.UpdateGame(model))
@@ -170,6 +178,11 @@ namespace TrivialPursuitMVC.Controllers
                 var gsvc = new GameService();
                 gsvc.ResetGame(game, ctx);
                 _usedQuestions = new List<int>();
+                if(game.PlayerTurn == 1)
+                {
+                    TempData["Winner"] = $"{game.Player.DisplayName} wins.";
+                    return View();
+                }
                 TempData["Winner"] = $"Player {game.PlayerTurn} wins.";
                 return View();
             }

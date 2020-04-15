@@ -29,7 +29,8 @@ namespace TrivialPursuit.Services
                     PlayerOnePie = entity.PlayerOnePie,
                     PlayerTwoPie = entity.PlayerTwoPie,
                     PlayerThreePie = entity.PlayerThreePie,
-                    PlayerFourPie = entity.PlayerFourPie
+                    PlayerFourPie = entity.PlayerFourPie,
+                    DisplayName = entity.Player.DisplayName
                 };
             }
         }
