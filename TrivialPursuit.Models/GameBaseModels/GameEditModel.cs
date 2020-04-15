@@ -29,6 +29,7 @@ namespace TrivialPursuit.Models.GameBaseModels
         public string CategoryName { get; set; }
         [Range(1,4,ErrorMessage ="Game must be between 1 and 4 players")]
         public int? NumberOfPlayers { get; set; }
+        public int? PlayerTurn { get; set; }
 
 
     }

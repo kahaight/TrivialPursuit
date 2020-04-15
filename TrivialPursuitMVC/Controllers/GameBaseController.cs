@@ -26,6 +26,8 @@ namespace TrivialPursuitMVC.Controllers
             var ctx = new ApplicationDbContext();
             var entity = ctx.GameBases.Single(e => e.PlayerId == playerId);
             gsvc.ResetGame(entity, ctx);
+            entity.PlayerTurn = 1;
+            ctx.SaveChanges();
             return View(model);
         }
         [HttpGet]
@@ -51,11 +53,11 @@ namespace TrivialPursuitMVC.Controllers
                 var qsvc = new QuestionService();
                 var questions = qsvc.GetQuestionsByVersionId(detail.GameVersionId);
                 QuestionDetail question = new QuestionDetail();
-                while(question.Text == null  || _usedQuestions.Contains(question.Id))
+                while (question.Text == null || _usedQuestions.Contains(question.Id))
                 {
-                var index = _random.Next(0, questions.Count());
-                question = questions[index];
-                    if(_usedQuestions.Count == questions.Count)
+                    var index = _random.Next(0, questions.Count());
+                    question = questions[index];
+                    if (_usedQuestions.Count == questions.Count)
                     {
                         _usedQuestions = new List<int>();
                     }
@@ -75,9 +77,9 @@ namespace TrivialPursuitMVC.Controllers
                         Question = detail.Question,
                         CategoryColor = detail.Question.Category.Color,
                         Answer = "",
-                        CategoryName = detail.Question.Category.Name
-
-
+                        CategoryName = detail.Question.Category.Name,
+                        NumberOfPlayers = detail.NumberOfPlayers,
+                        PlayerTurn = detail.PlayerTurn
                     };
                 _usedQuestions.Add(question.Id);
                 return View(repeatModel);
@@ -113,23 +115,32 @@ namespace TrivialPursuitMVC.Controllers
                     string correctAnswer = question.Answers.Single(e => e.IsCorrectSpelling == boolean).Text;
                     model.Question.IsUserGenerated = question.IsUserGenerated;
                     bool isCorrect = gsvc.CheckIfCorrect(model.Answer, question.Answers.ToList());
-                    if (gsvc.UpdateGame(model))
+                    if (model.PlayerTurn == 1 && !model.Question.IsUserGenerated)
                     {
-                        if (isCorrect)
+                        gsvc.IncrementAnswered(player, model, ctx);
+                    }
+                    if (isCorrect)
+                    {
+                        if (model.PlayerTurn == 1 && !model.Question.IsUserGenerated)
                         {
-                            TempData["Correct"] = "Correct.";
+                            gsvc.IncrementCorrect(player, model, ctx);
                         }
-                        if (!isCorrect)
+                        gsvc.UpdateAPie(game, model, ctx);
+                        TempData["Correct"] = "Correct.";
+                        if (gsvc.UpdateGame(model))
                         {
-                            TempData["Incorrect"] = $"Incorrect. The correct answer was {correctAnswer}";
-                        }
-                        gsvc.IncrementTally(player, model, ctx, isCorrect, game);
-                        if (gsvc.CheckWinCondition(game))
-                        {
-                            return RedirectToAction("Win");
-                        }
+                            if (gsvc.CheckWinCondition(game))
+                            {
+                                return RedirectToAction("Win");
+                            }
 
-                        return RedirectToAction("Edit");
+                            return RedirectToAction("Edit");
+                        }
+                    }
+                    if (!isCorrect)
+                    {
+                        model.PlayerTurn = gsvc.UpdatePlayerTurn(model);
+                        TempData["Incorrect"] = $"Incorrect. The correct answer was {correctAnswer}. Turn goes to player {model.PlayerTurn}";
                     }
                 }
                 if (gsvc.UpdateGame(model))
@@ -155,7 +166,7 @@ namespace TrivialPursuitMVC.Controllers
                 var gsvc = new GameService();
                 gsvc.ResetGame(game, ctx);
                 _usedQuestions = new List<int>();
-                TempData["Reset"] = "Reset.";
+                TempData["Winner"] = $"Player {game.PlayerTurn} wins.";
                 return View();
             }
         }

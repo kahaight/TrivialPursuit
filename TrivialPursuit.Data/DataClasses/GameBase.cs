@@ -29,7 +29,10 @@ namespace TrivialPursuit.Data.DataClasses
         public virtual Pie PlayerFourPie { get; set; } = new Pie();
 
         [DefaultValue(0)]
-        public int NumberOfPlayers { get; set; }
+        public int? NumberOfPlayers { get; set; }
+        [DefaultValue(1)]
+        public int? PlayerTurn { get; set; }
+
 
     }
 }

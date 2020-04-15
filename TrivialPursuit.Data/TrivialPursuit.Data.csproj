@@ -105,6 +105,10 @@
     <Compile Include="Migrations\202004140311032_PlayerAnswersNotNullable.Designer.cs">
       <DependentUpon>202004140311032_PlayerAnswersNotNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004150040287_AddedMultiplayer.cs" />
+    <Compile Include="Migrations\202004150040287_AddedMultiplayer.Designer.cs">
+      <DependentUpon>202004150040287_AddedMultiplayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004140311032_PlayerAnswersNotNullable.resx">
       <DependentUpon>202004140311032_PlayerAnswersNotNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004150040287_AddedMultiplayer.resx">
+      <DependentUpon>202004150040287_AddedMultiplayer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
