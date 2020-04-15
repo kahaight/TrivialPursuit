@@ -23,6 +23,8 @@ namespace TrivialPursuit.Services
                     PlayerId = entity.PlayerId,
                     GameBaseId = entity.PlayerId,
                     GameVersionId = entity.GameVersionId,
+                    PlayerTurn = entity.PlayerTurn,
+                    NumberOfPlayers = entity.NumberOfPlayers
 
                 };
             }
@@ -37,13 +39,15 @@ namespace TrivialPursuit.Services
             {
                 if (model.GameVersionId == null)
                 {
-                    var fisrtEntity =
+                    var firstEntity =
                         ctx
                             .GameBases
                             .Single(e => e.PlayerId == model.GameBaseId);
-                    fisrtEntity.GameVersionId = vsvc.GetVersionIdByName(model.GameVersion);
-                    fisrtEntity.QuestionId = model.QuestionId;
-                    fisrtEntity.Answer = model.Answer;
+                    firstEntity.GameVersionId = vsvc.GetVersionIdByName(model.GameVersion);
+                    firstEntity.QuestionId = model.QuestionId;
+                    firstEntity.Answer = model.Answer;
+                    firstEntity.NumberOfPlayers = model.NumberOfPlayers;
+
                     return ctx.SaveChanges() == 1;
                 }
                 var entity =
@@ -53,92 +57,154 @@ namespace TrivialPursuit.Services
                 entity.GameVersionId = model.GameVersionId;
                 entity.QuestionId = model.QuestionId;
                 entity.Answer = model.Answer;
+                entity.PlayerTurn = model.PlayerTurn;
                 return ctx.SaveChanges() == 1;
 
             }
         }
 
-        public void IncrementTally(ApplicationUser player, GameEditModel gameModel, ApplicationDbContext context, bool isCorrect, GameBase gameBase)
+        public void IncrementAnswered(ApplicationUser player, GameEditModel gameModel, ApplicationDbContext context)
         {
-            if (!gameModel.Question.IsUserGenerated)
+
+            switch (gameModel.CategoryColor)
             {
-                switch (gameModel.CategoryColor)
-                {
-                    case "Blue":
-                        player.BlueAnswered++;
-                        if (isCorrect)
-                        {
-                            player.BlueCorrect++;
-                            if (!gameBase.Pie.HasBluePiece)
-                            {
-                                gameBase.Pie.HasBluePiece = true;
-                            }
-                        }
+                case "Blue":
+                    player.BlueAnswered++;
 
-                        break;
-                    case "Pink":
-                        player.PinkAnswered++;
-                        if (isCorrect)
-                        {
-                            player.PinkCorrect++;
-                            if (!gameBase.Pie.HasPinkPiece)
-                            {
-                                gameBase.Pie.HasPinkPiece = true;
-                            }
-                        }
-                        break;
-                    case "Yellow":
-                        player.YellowAnswered++;
-                        if (isCorrect)
-                        {
-
-                            player.YellowCorrect++;
-                            if (!gameBase.Pie.HasYellowPiece)
-                            {
-                                gameBase.Pie.HasYellowPiece = true;
-                            }
-                        }
-                        break;
-                    case "Brown":
-                        player.BrownAnswered++;
-                        if (isCorrect)
-                        {
-
-                            player.BrownCorrect++;
-                            if (!gameBase.Pie.HasBrownPiece)
-                            {
-                                gameBase.Pie.HasBrownPiece = true;
-                            }
-                        }
-                        break;
-                    case "Green":
-                        player.GreenAnswered++;
-                        if (isCorrect)
-                        {
-
-                            player.GreenCorrect++;
-                            if (!gameBase.Pie.HasGreenPiece)
-                            {
-                                gameBase.Pie.HasGreenPiece = true;
-                            }
-                        }
-                        break;
-                    case "Orange":
-                        player.OrangeAnswered++;
-                        if (isCorrect)
-                        {
-
-                            player.OrangeCorrect++;
-                            if (!gameBase.Pie.HasOrangePiece)
-                            {
-                                gameBase.Pie.HasOrangePiece = true;
-                            }
-                        }
-                        break;
-                }
-                context.SaveChanges();
+                    break;
+                case "Pink":
+                    player.PinkAnswered++;
+                    break;
+                case "Yellow":
+                    player.YellowAnswered++;
+                    break;
+                case "Brown":
+                    player.BrownAnswered++;
+                    break;
+                case "Green":
+                    player.GreenAnswered++;
+                    break;
+                case "Orange":
+                    player.OrangeAnswered++;
+                    break;
             }
+            context.SaveChanges();
+        }
 
+
+
+        public void IncrementCorrect(ApplicationUser player, GameEditModel gameModel, ApplicationDbContext context)
+        {
+
+            switch (gameModel.CategoryColor)
+            {
+                case "Blue":
+                    player.BlueCorrect++;
+
+                    break;
+                case "Pink":
+                    player.PinkCorrect++;
+                    break;
+                case "Yellow":
+                    player.YellowCorrect++;
+                    break;
+                case "Brown":
+                    player.BrownCorrect++;
+                    break;
+                case "Green":
+                    player.GreenCorrect++;
+                    break;
+                case "Orange":
+                    player.OrangeCorrect++;
+                    break;
+            }
+            context.SaveChanges();
+
+        }
+
+        public void UpdateAPie(GameBase gameBase, GameEditModel model, ApplicationDbContext context)
+        {
+            switch (model.PlayerTurn)
+            {
+                case 1:
+                    UpdateThisPie(gameBase.PlayerOnePie, model.CategoryColor);
+                    break;
+                case 2:
+                    UpdateThisPie(gameBase.PlayerTwoPie, model.CategoryColor);
+                    break;
+                case 3:
+                    UpdateThisPie(gameBase.PlayerThreePie, model.CategoryColor);
+                    break;
+                case 4:
+                    UpdateThisPie(gameBase.PlayerFourPie, model.CategoryColor);
+                    break;
+
+            }
+            context.SaveChanges();
+        }
+        public void UpdateThisPie(Pie pie, string questionColor)
+        {
+            switch (questionColor)
+            {
+                case "Blue":
+                    {
+                        if (!pie.HasBluePiece)
+                        {
+                            pie.HasBluePiece = true;
+                        }
+                    }
+                    break;
+                case "Pink":
+                    if (!pie.HasPinkPiece)
+                    {
+                        pie.HasPinkPiece = true;
+                    }
+                    break;
+                case "Yellow":
+                    if (!pie.HasYellowPiece)
+                    {
+                        pie.HasYellowPiece = true;
+                    }
+                    break;
+                case "Brown":
+                    if (!pie.HasBrownPiece)
+                    {
+                        pie.HasBrownPiece = true;
+                    }
+                    break;
+                case "Green":
+                    if (!pie.HasGreenPiece)
+                    {
+                        pie.HasGreenPiece = true;
+                    }
+                    break;
+                case "Orange":
+                    if (!pie.HasOrangePiece)
+                    {
+                        pie.HasOrangePiece = true;
+                    }
+                    break;
+            }
+        }
+
+        public int? UpdatePlayerTurn(GameEditModel model)
+        {
+            if (model.NumberOfPlayers == 2)
+            {
+                if (model.PlayerTurn == 1) return 2;
+            }
+            if (model.NumberOfPlayers == 3)
+            {
+                if (model.PlayerTurn == 1) return 2;
+                if (model.PlayerTurn == 2) return 3;
+            }
+            if (model.NumberOfPlayers == 4)
+            {
+                if (model.PlayerTurn == 1) return 2;
+                if (model.PlayerTurn == 2) return 3;
+                if (model.PlayerTurn == 3) return 4;
+            }
+            return 1;
         }
 
         public bool CheckIfCorrect(string answer, List<Answer> answers)
@@ -155,7 +221,19 @@ namespace TrivialPursuit.Services
 
         public bool CheckWinCondition(GameBase gameBase)
         {
-            if (gameBase.Pie.HasBluePiece && gameBase.Pie.HasPinkPiece && gameBase.Pie.HasYellowPiece && gameBase.Pie.HasBrownPiece && gameBase.Pie.HasGreenPiece && gameBase.Pie.HasOrangePiece)
+            if (gameBase.PlayerOnePie.HasBluePiece && gameBase.PlayerOnePie.HasPinkPiece && gameBase.PlayerOnePie.HasYellowPiece && gameBase.PlayerOnePie.HasBrownPiece && gameBase.PlayerOnePie.HasGreenPiece && gameBase.PlayerOnePie.HasOrangePiece)
+            {
+                return true;
+            }
+            if (gameBase.PlayerTwoPie.HasBluePiece && gameBase.PlayerTwoPie.HasPinkPiece && gameBase.PlayerTwoPie.HasYellowPiece && gameBase.PlayerTwoPie.HasBrownPiece && gameBase.PlayerTwoPie.HasGreenPiece && gameBase.PlayerTwoPie.HasOrangePiece)
+            {
+                return true;
+            }
+            if (gameBase.PlayerThreePie.HasBluePiece && gameBase.PlayerThreePie.HasPinkPiece && gameBase.PlayerThreePie.HasYellowPiece && gameBase.PlayerThreePie.HasBrownPiece && gameBase.PlayerThreePie.HasGreenPiece && gameBase.PlayerThreePie.HasOrangePiece)
+            {
+                return true;
+            }
+            if (gameBase.PlayerFourPie.HasBluePiece && gameBase.PlayerFourPie.HasPinkPiece && gameBase.PlayerFourPie.HasYellowPiece && gameBase.PlayerFourPie.HasBrownPiece && gameBase.PlayerFourPie.HasGreenPiece && gameBase.PlayerFourPie.HasOrangePiece)
             {
                 return true;
             }
@@ -164,14 +242,34 @@ namespace TrivialPursuit.Services
 
         public void ResetGame(GameBase gameBase, ApplicationDbContext ctx)
         {
+            gameBase.QuestionId = null;
             gameBase.Answer = null;
             gameBase.GameVersionId = null;
-            gameBase.Pie.HasBluePiece = false;
-            gameBase.Pie.HasBrownPiece = false;
-            gameBase.Pie.HasGreenPiece = false;
-            gameBase.Pie.HasOrangePiece = false;
-            gameBase.Pie.HasPinkPiece = false;
-            gameBase.Pie.HasYellowPiece = false;
+            gameBase.PlayerOnePie.HasBluePiece = false;
+            gameBase.PlayerOnePie.HasBrownPiece = false;
+            gameBase.PlayerOnePie.HasGreenPiece = false;
+            gameBase.PlayerOnePie.HasOrangePiece = false;
+            gameBase.PlayerOnePie.HasPinkPiece = false;
+            gameBase.PlayerOnePie.HasYellowPiece = false;
+            gameBase.PlayerTwoPie.HasBluePiece = false;
+            gameBase.PlayerTwoPie.HasBrownPiece = false;
+            gameBase.PlayerTwoPie.HasGreenPiece = false;
+            gameBase.PlayerTwoPie.HasOrangePiece = false;
+            gameBase.PlayerTwoPie.HasPinkPiece = false;
+            gameBase.PlayerTwoPie.HasYellowPiece = false;
+            gameBase.PlayerThreePie.HasBluePiece = false;
+            gameBase.PlayerThreePie.HasBrownPiece = false;
+            gameBase.PlayerThreePie.HasGreenPiece = false;
+            gameBase.PlayerThreePie.HasOrangePiece = false;
+            gameBase.PlayerThreePie.HasPinkPiece = false;
+            gameBase.PlayerThreePie.HasYellowPiece = false;
+            gameBase.PlayerFourPie.HasBluePiece = false;
+            gameBase.PlayerFourPie.HasBrownPiece = false;
+            gameBase.PlayerFourPie.HasGreenPiece = false;
+            gameBase.PlayerFourPie.HasOrangePiece = false;
+            gameBase.PlayerFourPie.HasPinkPiece = false;
+            gameBase.PlayerFourPie.HasYellowPiece = false;
+            gameBase.NumberOfPlayers = 0;
             ctx.SaveChanges();
 
 

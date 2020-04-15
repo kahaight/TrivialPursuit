@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,9 @@ namespace TrivialPursuit.Models.GameBaseModels
         public string Answer { get; set; }
         public string CategoryColor { get; set; }
         public string CategoryName { get; set; }
+        [Range(1,4,ErrorMessage ="Game must be between 1 and 4 players")]
+        public int? NumberOfPlayers { get; set; }
+        public int? PlayerTurn { get; set; }
 
 
     }

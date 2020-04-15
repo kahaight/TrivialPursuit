@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -22,7 +23,16 @@ namespace TrivialPursuit.Data.DataClasses
         public int? QuestionId { get; set; }
         public virtual Question Question {get; set;}
         public string Answer { get; set; }
-        public virtual Pie Pie { get; set; } = new Pie();
+        public virtual Pie PlayerOnePie { get; set; } = new Pie();
+        public virtual Pie PlayerTwoPie { get; set; } = new Pie();
+        public virtual Pie PlayerThreePie { get; set; } = new Pie();
+        public virtual Pie PlayerFourPie { get; set; } = new Pie();
+
+        [DefaultValue(0)]
+        public int? NumberOfPlayers { get; set; }
+        [DefaultValue(1)]
+        public int? PlayerTurn { get; set; }
+
 
     }
 }

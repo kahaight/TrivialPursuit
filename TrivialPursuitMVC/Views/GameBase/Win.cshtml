@@ -4,7 +4,7 @@
     ViewBag.Title = "Win";
 }
 
-<h2>You Win!</h2>
+<h2>@TempData["Winner"]</h2>
 @if (User.Identity.IsAuthenticated)
 {
     <p><a href='@Url.Action("Index", "GameBase")' class="btn btn-primary">Play Again</a></p>
