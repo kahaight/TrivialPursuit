@@ -118,6 +118,7 @@ namespace TrivialPursuitMVC.Controllers
                     var boolean = true;
                     var question = qsvc.GetQuestionByIdForGame(model.QuestionId);
                     string correctAnswer = question.Answers.Single(e => e.IsCorrectSpelling == boolean).Text;
+                    model.Question = new Question();
                     model.Question.IsUserGenerated = question.IsUserGenerated;
                     bool isCorrect = gsvc.CheckIfCorrect(model.Answer, question.Answers.ToList());
                     if (model.PlayerTurn == 1 && !model.Question.IsUserGenerated)

@@ -20,7 +20,7 @@ namespace TrivialPursuit.Models.GameBaseModels
         [ForeignKey(nameof(Question))]
         public int? QuestionId { get; set; }
         [DisplayName("Question:")]
-        public virtual TrivialPursuit.Data.DataClasses.Question Question { get; set; } = new Data.DataClasses.Question();
+        public virtual Data.DataClasses.Question Question { get; set; }
         [ForeignKey(nameof(GameVersionType))]
         public int? GameVersionId { get; set; }
         public virtual GameVersion GameVersionType { get; set; }

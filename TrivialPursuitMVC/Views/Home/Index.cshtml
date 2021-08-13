@@ -2,66 +2,79 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Trivial Pursuit</h1>
-    <p class="lead">Play a round of trivial pursuit to beef up your trivia knowledge. Don't look like a fool at your local bar's trivia night ever again.</p>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <h2 style="font-size: 60px;"><a href='@Url.Action("Index", "GameBase")' class="btn" id="aone"></a>Play Now</h2>
-    }
-    @if (!User.Identity.IsAuthenticated)
-    {
+<div class="container">
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <div class="row">
 
-        <h2 style="font-size: 60px;"><a href='@Url.Action("Register", "Account")' class="btn" id="aone"></a>Register</h2>
-    }
-</div>
+        <div class="col-6 col-md-4">
+            <h1>Trivial Pursooot</h1>
+        </div>
+        <div class="col-md-8">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href='@Url.Action("Index", "GameBase")' class="btn" id="aone"><span style="color: white;" id="spanOne">Play Now</span></a>
+            }
+            @if (!User.Identity.IsAuthenticated)
+            {
 
-<div class="row">
-
-    <div class="col-md-4">
-        <h2>My Questions!</h2>
-        <a href='@Url.Action("Index", "Question")' class="btn" id="atwo"></a>
-    </div>
-    <div class="col-md-4">
-        <h2>My Answers</h2>
-        <a href='@Url.Action("Index", "Answer")' class="btn" id="athree"></a>
-    </div>
-    <div class="col-md-4">
-        <h2>
-            Rankings
-        </h2>
-        <a href='@Url.Action("Index", "User")' class="btn" id="afour"></a>
+                <a href='@Url.Action("Register", "Account")' class="btn" id="aone"></a><span id="spanOne">Register</span>
+            }
+            <a href='@Url.Action("Index", "Question")' class="btn" id="atwo"></a>
+            <a href='@Url.Action("Index", "Answer")' class="btn" id="athree"><span style="color: white;" id="spanThree">Add Answers</span></a><span style="color: white;" id="spanTwo">Create Questions</span>
+            <a href='@Url.Action("Index", "User")' class="btn" id="afour"><span style="color: white;" id="spanTwo">Create Questions</span></a>
+        </div>
     </div>
 </div>
+
 <style>
+
+    .col-md-8 {
+        position: relative;
+        text-align: center;
+    }
+
     .btn {
         width: 0;
         height: 0;
-        border-left: 100px solid transparent;
-        border-right: 100px solid transparent;
-        border-top: 200px solid;
+        border-left: 20vw solid transparent;
+        border-right: 20vw solid transparent;
+        border-top: 35vw solid;
         padding: 0;
-        border-radius: 50%;
+        border-radius: 43%;
+        text-align: center;
+        overflow: hidden;
     }
 
     #aone {
         color: rebeccapurple;
+        transform: rotate(0deg);
+        position: absolute;
+        top: 10vw;
+        left: 5vw;
     }
 
         #aone:hover {
-            color: yellow;
+            color: transparent;
         }
 
     #atwo {
         color: blue;
+        transform: rotate(60deg);
+        position: absolute;
+        top: 20vw;
+        left: 21vw;
     }
 
-    #atwo:hover {
-        color: yellow;
-    }
+        #atwo:hover {
+            color: yellow;
+        }
 
     #athree {
         color: deeppink;
+        transform: rotate(120deg);
+        position: absolute;
+        top: 39vw;
+        left: 21vw;
     }
 
         #athree:hover {
@@ -70,12 +83,42 @@
 
     #afour {
         color: green;
+        transform: rotate(180deg);
+        position: absolute;
+        top: 49vw;
+        left: 5vw;
     }
 
         #afour:hover {
             color: yellow;
         }
-        .col-md-4{
-            text-align: center;
-        }
+
+    .col-md-4 {
+        text-align: center;
+    }
+
+    #spanOne {
+        position: relative;
+        top: -145px;
+        left: -15px;
+        color: white;
+    }
+
+    #spanTwo {
+        position: relative;
+        top: -145px;
+        left: -15px;
+    }
+
+    #spanThree {
+        position: relative;
+        top: -145px;
+        left: -15px;
+    }
+
+    #spanFour {
+        position: relative;
+        top: -145px;
+        left: -15px;
+    }
 </style>
