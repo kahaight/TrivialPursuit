@@ -54,7 +54,14 @@
 
             @if (Model.GameVersionId != null)
             {
+                if(Model.PlayerTurn == 1)
+                {
+                <h2>Turn: @Model.DisplayName;</h2>
+                }
+                else
+                {
                 <h2>Turn: Player @Model.PlayerTurn</h2>
+                }
                 @Html.HiddenFor(model => model.GameVersionId)
                 @Html.HiddenFor(model => model.CategoryColor)
                 @Html.HiddenFor(model => model.NumberOfPlayers)
@@ -98,7 +105,7 @@
 
             <tr>
                 <td>
-                    Player1
+                    @Model.DisplayName
                 </td>
                 <td>
                     <div id="PlayerOneBlue"></div>

@@ -22,10 +22,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.QuestionId)
+            @Html.DisplayNameFor(model => model.Text)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Text)
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GameVersion.Name)
         </th>
         <th></th>
     </tr>
